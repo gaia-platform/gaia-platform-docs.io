@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Rules development example | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Rules development example | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="rules-development-example">Rules development example</h1>
+
+<p>This document describes the creation of rules for a sample pallet tracking system.</p>
+<p>You define rules to respond whenever data is changed is committed to the database, whether that is at the row level, or an individual field.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>A basic understanding of the Gaia database. For more information,
+see <a href="gaiac-ddl.html">Gaiac and DDL</a>.</li>
+<li>A basic understanding of rules and their creation. For more
+information, see <a href="rules-creation-basics.html">Rules creation basics</a>.</li>
+</ul>
+<p>In the design phase for your system, you define the business logic
+that describes how your system operates. After your initial design is
+complete, the architecture of the Gaia Platform lends itself best to the
+following workflow:</p>
+<ul>
+<li>Create a schema for your application.
+<ul>
+<li>The schema defines tables and fields that contain the state of your system at any given time.</li>
+<li>Add tables to manage the state of your application.</li>
+<li>Determine which columns in the schema drive the behavior. Your rules will act on these fields.</li>
+</ul>
+</li>
+<li>In your makefile run gaiac to import the schema and create tables for your database. The Catalog provides a key resource in documenting and understanding systems because it contains metadata that describes the Data and Rule connections and interactions.
+<ul>
+<li>Gaiac generates a header that contains the edc classes that define your schema in code. You include in this header your ruleset definition file.</li>
+</ul>
+</li>
+<li>Create your ruleset.
+<ul>
+<li>Identify the actions to be performed when an Active Field changes.</li>
+</ul>
+</li>
+<li>Run gaiat to translate the ruleset into code files that you include in your app.</li>
+<li>Create your application and call the code supplied by gaiat.</li>
+</ul>
+<p>Build the data model, then add Rules to handle the required processing. Add event handlers to connect external sensors and actuators to your model and you have a system. System, unit and integration testing is simplified with our &quot;Data at the center&quot; model; it allows test code to insert simulated events into the system and verify the correctness of the responses.</p>
+<h2 id="business-logic"><strong>Business logic</strong></h2>
+<p>For the sample application the business logic is shown in this diagram:</p>
+<p><img src="images%5Crules-example-process-flow.png" alt="Example rules process flow"></p>
+<p>The camera sees a new code</p>
+<p>Determine what the code is:</p>
+<ul>
+<li>Loading Area</li>
+<li>Pallet</li>
+<li>Package</li>
+<li>Unknown</li>
+</ul>
+<h2 id="database-schema">Database schema</h2>
+<p>To support the initial definition of the business logic, we define our database schema as follows:</p>
+<pre><code>facility
+
+id : string
+loading\area
+id : string,
+last\pallet\id : string active,
+current\pallet\id : string active,
+current\package\id : string active,
+loading\area\\facility references facility
+
+camera
+
+id : string,
+function\code : string,
+camera\data\code : string active,
+camera\\loading\area references loading\area
+
+seen\object
+
+id : string,
+seen\object\\camera references camera
+
+pallet
+
+id : string,
+manifest\id : string active,
+pallet\\loading\area references loading\area
+
+manifest
+
+id : string,
+state : string active,
+desired\qty : int32,
+actual\qty : int32 active,
+manifest\\pallet references pallet
+
+manifest\package
+
+id : string,
+package\id : string,
+desired\qty : int32,
+actual\qty : int32 active,
+manifest\package\\manifest references manifest
+
+package
+
+id : string,
+package\\manifest references manifest
+</code></pre>
+<h2 id="rules-definitions">Rules Definitions</h2>
+<p>The Rules of the system are defined directly on data, at the active field or table level. The Rules are invoked automatically as that data is added or modified within the system.</p>
+<p>The example below models the example rules process flow of the design.</p>
+<pre><code class="lang-cpp">std::string data = &quot;&quot;;
+
+// Here we define our declarative rules
+//
+ruleset smartpallet_ruleset
+{
+    {
+        // The camera sees a new code
+        //
+        // Reacts to: camera.camera_data_code
+        // Changes:
+        //      loading_area.last_pallet_id
+        //      loading_area.current_pallet_id
+        //      loading_area.current_package_id
+        //      camera.camera_data_code
+        //
+        if(strlen(camera.camera_data_code) &gt; 0)
+        {
+            send_status_message(&quot;DEBUG&quot;,
+                std::string(&quot;Code Seen : &quot;) +
+                camera.camera_data_code, &quot;NONE&quot;);
+
+            switch( get_object_type(camera.camera_data_code) )
+            {
+                    case object_type_enum::loading_area_type:
+                        data = std::string(@loading_area.current_pallet_id);
+                        loading_area.last_pallet_id = @loading_area.current_pallet_id;
+                        loading_area.current_pallet_id = &quot;&quot;;
+                    break;
+                    case object_type_enum::package_type:
+                        loading_area.current_package_id = camera.camera_data_code;
+                    break;
+                    case object_type_enum::pallet_type:
+                        loading_area.current_pallet_id = camera.camera_data_code;
+                    break;
+                    default:
+                        send_status_message(&quot;ERROR&quot;,
+                            std::string(&quot;Unidentified Object Seen : &quot;) +
+                            camera.camera_data_code, &quot;RED&quot;);
+                    break;
+            }
+
+            //Reset
+            camera.camera_data_code = &quot;&quot;;
+        }
+    }
+    {
+        // A pallet has moved onto or off of a loading area
+        //
+        // Reacts to: loading_area.current_pallet_id
+        // Changes:
+        // Creates: pallet
+        //
+        if(strlen(loading_area.current_pallet_id) == 0)
+        {
+            send_status_message(&quot;DEBUG&quot;,
+                std::string(&quot;Loading area : &quot;) +
+                @loading_area.id + &quot; is empty&quot;, &quot;NONE&quot;);
+        }
+        else
+        {
+            send_status_message(&quot;DEBUG&quot;,
+                std::string(&quot;Pallet: &quot;) +
+                loading_area.current_pallet_id +
+                &quot; in loading area: &quot; +
+                @loading_area.id, &quot;NONE&quot;);
+
+            auto cbc = ismartpallet::get_callback_class();
+
+            // find the next new manifest
+            auto manifest_id = cbc-&gt;cb_get_next_manifest_id();
+
+            if( manifest_id.length() == 0 )
+            {
+                send_status_message(&quot;OPS&quot;,
+                    std::string(&quot;No manifests pending. Do not load pallet.&quot;), &quot;RED&quot;);
+                return;
+            }
+
+            // insert a pallet row into the db
+            cbc-&gt;cb_insert_pallet(@loading_area.current_pallet_id, @loading_area.id, manifest_id);
+
+            send_status_message(&quot;DEBUG&quot;,
+                std::string(&quot;Manifest: &quot;) +
+                manifest_id + &quot; added to pallet: &quot; +
+                loading_area.current_pallet_id, &quot;NONE&quot;);
+
+            send_status_message(&quot;OPS&quot;,
+                std::string(&quot;Pallet ready for loading&quot;), &quot;YELLOW&quot;);
+        }
+    }
+    {
+        // if last_pallet_id changed
+        //
+        // Reacts to: loading_area.last_pallet_id
+        // Changes:
+        //
+        auto cbc = ismartpallet::get_callback_class();
+
+        // find the pallet manifest
+        auto manifest_id = cbc-&gt;cb_get_pallet_manifest_id(loading_area.last_pallet_id);
+
+        if(cbc-&gt;cb_get_manifest_state(manifest_id) == &quot;FULL&quot;)
+            send_status_message(&quot;OPS&quot;,
+                std::string(&quot;Pallet: &quot;) +
+                loading_area.last_pallet_id +
+                &quot; removed from loading area: &quot; + @loading_area.id, &quot;GREEN&quot;);
+        else
+            send_status_message(&quot;OPS&quot;,
+                std::string(&quot;Pallet: &quot;) +
+                loading_area.last_pallet_id +
+                &quot; removed from loading area: &quot; + @loading_area.id +
+                &quot; was not full, recall pallet immidiately.&quot;, &quot;RED&quot;);
+    }
+    {
+        // A package has moved onto a loading area
+        //
+        // Reacts to: loading_area.current_package_id
+        // Changes: loading_area.current_package_id
+        // Creates: package
+        //
+        if(strlen(loading_area.current_package_id) &gt; 0)
+        {
+            //send_status_message(&quot;DEBUG&quot;,
+            //    std::string(&quot;Package: &quot;) +
+            //    loading_area.current_package_id +
+            //    &quot; in loading area: &quot; +
+            //    @loading_area.id, &quot;NONE&quot;);
+
+            auto cbc = ismartpallet::get_callback_class();
+
+            // find the pallet manifest
+            auto manifest_id = cbc-&gt;cb_get_pallet_manifest_id(@loading_area.current_pallet_id);
+
+            // find the pallet manifest package
+            auto manifest_package_id = cbc-&gt;cb_get_manifest_package_id(manifest_id, @loading_area.current_package_id);
+
+            // if we didnt find this line item in this manifest
+            if(manifest_package_id.length() == 0)
+            {
+                send_status_message(&quot;OPS&quot;,
+                    std::string(&quot;Package: &quot;) +
+                    loading_area.current_package_id +
+                    &quot; is not a line item on this manifest. Remove immidately.&quot;, &quot;RED&quot;);
+
+                return;
+            }
+
+            // add package to db
+            cbc-&gt;cb_insert_seen_package(loading_area.current_package_id, manifest_id);
+
+            send_status_message(&quot;DEBUG&quot;,
+                std::string(&quot;Package: &quot;) +
+                loading_area.current_package_id +
+                &quot; in loading area: &quot; + @loading_area.id +
+                &quot; added to manifest: &quot; + manifest_id, &quot;NONE&quot;);
+
+            //Reset
+            loading_area.current_package_id = &quot;&quot;;
+        }
+    }
+    {
+        // A package has been added to a manifest
+        //
+        // Reacts to: package.LastOperation
+        // Changes: manifest.actual_qty
+        //
+        if(package.LastOperation == INSERT)
+        {
+            if( @manifest.actual_qty + 1 &gt; @manifest.desired_qty )
+                send_status_message(&quot;OPS&quot;,
+                    std::string(&quot;Too many packages on manifest: &quot;) +
+                    @manifest.id, &quot;RED&quot;);
+            else
+            {
+                send_status_message(&quot;OPS&quot;,
+                    std::string(&quot;Package : &quot;) + @package.id + &quot; added to manifest: &quot; +
+                    @manifest.id, &quot;YELLOW&quot;);
+
+                manifest.actual_qty += 1;
+            }
+        }
+    }
+    {
+        // Check if manifest is full
+        //
+        // Reacts to: manifest.actual_qty
+        // Changes: manifest.state
+        //
+        if( manifest.actual_qty == @manifest.desired_qty )
+        {
+            send_status_message(&quot;OPS&quot;,
+                std::string(&quot;Manifest : &quot;) + @manifest.id +
+                &quot; is complete with : &quot; + std::to_string(@manifest.desired_qty) + &quot; packages&quot;, &quot;GREEN&quot;);
+
+            manifest.state = &quot;FULL&quot;;
+        }
+        else
+        {
+            send_status_message(&quot;OPS&quot;,
+                std::string(&quot;Manifest : &quot;) + @manifest.id +
+                &quot; has &quot; + std::to_string(@manifest.actual_qty) +
+                &quot; of &quot; + std::to_string(@manifest.desired_qty) + &quot; packages&quot;, &quot;YELLOW&quot;);
+        }
+    }
+    {
+        // Check if manifest line item is over full
+        //
+        // Reacts to: manifest_package.actual_qty
+        // Changes:
+        //
+        if( manifest_package.actual_qty &gt; @manifest_package.desired_qty )
+        {
+            send_status_message(&quot;OPS&quot;,
+                std::string(&quot;Too many packages of type : &quot;) + @manifest_package.package_id +
+                &quot; on pallet. Remove package immediately.&quot;, &quot;RED&quot;);
+        }
+    }
+}
+</code></pre>
+<h3 id="rule-chaining">Rule Chaining</h3>
+<p>The following figure presents the path of chaining implemented in the rules. Each of the rules presented in the section above has one or more inputs, outputs, and/or creates. Outputs and creates from one rule trigger the activation of rules which have inputs that match the outputs and creates.</p>
+<p>Note that the complexity of the relationships may be more complex than shown in the chaining table, because rules may use non triggering objects in addition to triggering objects to change system state.</p>
+<p><img src="images%5Crules-example-process-flow.png" alt=""></p>
+<h5 id="translated-c-code">Translated C++ Code</h5>
+<p>The translation process renders each rule as two C++ functions:</p>
+<ol>
+<li>A function that is the body of the Rule rewritten with 100% C++.</li>
+<li>An additional set of C++ statements that are a contribution to the &quot;well known&quot; initialization function that subscribes this Rule’s  new function to the Event associated with the active fields that are referenced.</li>
+</ol>
+<p>Next question is how does this get executed? Recall that I said this was an active field defined in the schema. That active designation is very important. Writing a Rule that reads an active field causes that Rule to be subscribed to all changes to that field. Whenever this active field is updated and committed in the greeting table, this specific rule iswill be automatically executed. When the Rule is executed, the row that was operated on iswill be delivered to the rule as an automatic parameter. In our example the greetings table is automatically selected based on the fact that the field name my_name is unique and only appears in that table. The my_name reference then is literally referring to the my_name field in the row that was inserted into the greeting table. Since the entire row was passed into the rule, all defined fields from that row are available for use in this rule.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/gaia-platform/gaia-docs/blob/master/articles/rules-development-example.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

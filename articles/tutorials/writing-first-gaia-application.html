@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Prerequisites | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Prerequisites | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../images/gaiafav.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+
+<p>The information contained in this document represents information about
+prerelease features of the product. Features might change when the
+product is released for general availability.</p>
+<p>In this walkthrough, you’ll write and run your first Gaia Platform
+application. The code that you will write is also available under the
+/opt/gaia/examples/hello folder of the distribution package. If you
+encounter any errors along the way, you can compare the files that you
+generated from these instructions against those already provided.</p>
+<p>The example walks you through most aspects of the Gaia Platform system.
+You’ll learn how to:</p>
+<ul>
+<li>Define a database schema and compile it with the Gaia Catalog Tool (gaiac).</li>
+<li>Write a few simple rules and translate them using the Gaia Translation Engine (gaiat).</li>
+<li>Write, build, and execute a simple application to trigger our rules by inserting data into the database.</li>
+</ul>
+<h1 id="prerequisites">Prerequisites</h1>
+<p>For information about the Gaia Platform prerequisites and installing the
+SDK, see <a href="../articles/getting-started-with-gaia.md">Getting Started with the Gaia Platform</a>.</p>
+<h1 id="the-hello-application">The Hello application</h1>
+<p>The goal of the application is to generate greetings for input names. To
+demonstrate the features of the system, the code inserts names into a
+table, which triggers a rule that generates greetings for those names
+and inserts them into a second table. The insertions into the second
+table trigger a second rule that prints the greetings to the console.</p>
+<p>For this purpose, there are two tables:</p>
+<ul>
+<li><p>A <strong>names</strong> table with a single <strong>name</strong> column, of string type.</p>
+</li>
+<li><p>A <strong>greetings</strong> table with a single <strong>greeting</strong> column, of string type.</p>
+</li>
+</ul>
+<p>There are also two rules:</p>
+<ul>
+<li><p>A rule that triggers on insertions into the <strong>names</strong> table and that will in turn form and insert a greeting into the <strong>greetings</strong> table.</p>
+</li>
+<li><p>A rule that triggers on insertions into the <strong>greetings</strong> table and prints the greeting values to the console.</p>
+</li>
+</ul>
+<p>To put all of this together, you’ll also write a small application that inserts some names into the <strong>names</strong> table to trigger the rules.</p>
+<h1 id="creating-a-new-application-folder">Creating a new application folder</h1>
+<p>Create a new folder in which to store the files for the application.</p>
+<p>mkdir hello_sample</p>
+<p>cd hello_sample</p>
+<p>You’ll execute all of the commands specified in this document in this
+folder.</p>
+<h1 id="specifying-the-hello-database-schema">Specifying the Hello database schema</h1>
+<p>In your source folder, create a hello.ddl text file. Copy and paste the
+following definitions in it:</p>
+<pre><code class="lang-sql">create table if not exists names
+(
+    name string active
+);
+
+create table if not exists greetings
+(
+    greeting string active
+);
+</code></pre>
+<p>If you are familiar with SQL syntax this definition format should be familiar. The statements define the two tables, <strong>names</strong> and <strong>greetings</strong>*,* that our application uses. The keyword <strong>active</strong> is new and is specific to Gaia.</p>
+<p>Active Fields are Database Column names that you refer to in the body of a Declarative Rule expression. When your declarative code refers to one
+of these Fields with a read operation, Gaia triggers an Event that schedules the associated Declarative Rules execute.</p>
+<p>The next step is to compile the definitions and generate the tables in the Gaia database. To do this you use the gaiac tool. At the command
+line, in the folder in which you created the hello.ddl file, run the following command:</p>
+<p><strong>gaiac -g hello.ddl</strong></p>
+<p>gaiac prints a message that tells you where it wrote the gaia_hello.h file. This file contains definitions necessary to programmatically interact with the tables that are generated based on the definitions. You will see these referred to as Extended Data Classes, or EDC, for short.</p>
+<p>Gaiac generates a second file name hello_generated.h. This is included by the gaia_hello.<em>h</em> file; you will not reference this file directly.</p>
+<p>To verify that the tables were successfully created, run gaiac in an interactive mode:</p>
+<p><strong>gaiac -i</strong></p>
+<p>At the prompt, type the following command to list all the database tables.</p>
+<p><strong>l</strong></p>
+<p>You should see two rows for the <strong>names</strong> and <strong>greetings</strong> tables. The other entries are for system catalog tables or other tables that you might have generated with other examples. The entries that you are interested in are listed last and look similar to the following:</p>
+<table>
+<thead>
+<tr>
+<th>Database</th>
+<th>Name</th>
+<th>ID</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>hello</td>
+<td>names</td>
+<td>48</td>
+<td>1</td>
+</tr>
+<tr>
+<td>hello</td>
+<td>greetings</td>
+<td>50</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Do not worry if the <strong>ID</strong> values or the <strong>Type</strong> values look different the important thing is to see the tables listed.</p>
+<p>To exit the interactive gaiac session, use the following command:</p>
+<p><strong>exit</strong></p>
+<h1 id="specifying-the-hello-rules">Specifying the Hello rules</h1>
+<p>Create a new file and name it hello.ruleset. Copy and paste the following content to it:</p>
+<pre><code class="lang-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+#include &quot;gaia_hello.h&quot;
+
+using namespace std;
+
+ruleset hello_ruleset
+{
+  // Rule 1: Whenever a name is inserted,
+  // insert a new greeting into the greetings table.
+  {
+    // This LastOperation reference will indicate to the system
+    // that this rule should be triggered
+    // by any insertion made into the names table.
+    if (names.LastOperation == INSERT)
+    {
+      // Form the greeting using the name.
+      string new_greeting = &quot;Hello &quot; + string(names.name) + &quot;!&quot;;
+
+      // Insert the greeting.
+      gaia::hello::greetings_t::insert_row(new_greeting.c_str());
+    }
+  }
+  // Rule 2: Whenever a greeting is inserted,
+  // output it to the console.
+  {
+    // This LastOperation reference will indicate to the system
+    // that this rule should be triggered
+    // by any insertion made into the greetings table.
+    if (greetings.LastOperation == INSERT)
+    {
+       // Output the greeting to the console.
+       cout &lt;&lt; endl &lt;&lt; greetings.greeting &lt;&lt; endl;
+    }
+  }
+}
+</code></pre>
+<p>The ruleset file defines two rules. Updates to the names table trigger the first rule. - this is caused by the rule simply referencing <em>names.LastOperation</em>. Because we’re only interested in acting on insert operations, the rule specifically checks that the last operation is an insert. INSERT is a system constant.</p>
+<p>To insert the greeting that we constructed into the greetings table, we use the <strong>gaia::hello::greetings_t::insert_row</strong> method that was generated in the <em>gaia_hello.h</em> file by gaiac, when we compiled the table declarations.</p>
+<p>Finally, the second rule outputs the greeting to the console.</p>
+<p>The rules code looks very much like C++ but, before you can compile it, you must translate it into proper C++ code using the Gaia translator tool - gaiat.</p>
+<p>To generate C++ code for these rules, execute the following command:</p>
+<p><strong>gaiat hello.ruleset -output hello_rules.cpp -- -I /usr/lib/clang/8/include/ -I /opt/gaia/include/</strong></p>
+<p><strong>NOTE</strong>: The two include paths of this command might need to be updated if Gaia and clang have been installed in a non-standard way or if you’re using a version of Clang other than 8.</p>
+<p>The output of this step is the hello_rules.cpp that contains the C++ version of our rules. You are now ready to compile these into an application.</p>
+<h1 id="writing-the-hello-application">Writing the Hello application</h1>
+<p>Create a new file and name it hello.cpp. Copy and paste the following code into it:</p>
+<pre><code class="lang-cpp">#include &lt;iostream&gt;
+
+#include &quot;gaia/system.hpp&quot;
+#include &quot;gaia_hello.h&quot;
+
+using namespace std;
+
+int main()
+{
+  cout
+    &lt;&lt; &quot;Hello example is running...&quot;
+    &lt;&lt; endl;
+
+  gaia::system::initialize();
+
+  gaia::db::begin_transaction();
+  gaia::hello::names_t::insert_row(&quot;Alice&quot;);
+  gaia::hello::names_t::insert_row(&quot;Bob&quot;);
+  gaia::hello::names_t::insert_row(&quot;Charles&quot;);
+  gaia::db::commit_transaction();
+
+  gaia::system::shutdown();
+
+  cout &lt;&lt; &quot;Hello example has shut down.&quot; &lt;&lt; endl;
+}
+
+</code></pre>
+<p>Let’s go over the main steps of this code:</p>
+<ul>
+<li><strong>gaia::system::initialize()</strong> initializes the Gaia system.</li>
+<li>The insertion of the names needs to be done within a transaction     that we start with <strong>gaia::db::begin_transaction()</strong> and complete     with <strong>gaia::db::commit_transaction()</strong>. The actual insertions use the generated <strong>gaia::hello::names_t</strong> helper from     gaia_hello.h.</li>
+<li>Our application completes its execution by calling gaia::system::shutdown(), which is the counterpart to our <strong>gaia::system::initialize()</strong> call.</li>
+</ul>
+<p>To build this code, use the following command:</p>
+<p><strong>clang++-8 hello.cpp hello_rules.cpp /usr/local/lib/libgaia.so -I /opt/gaia/include -Wl,-rpath,/usr/local/lib -o hello -lpthread</strong></p>
+<p>If you are using a newer version of the clang compiler or if Gaia is installed in a non-standard location, update this command accordingly.
+Its result should be a <em>hello</em> executable, which represents our Hello application.</p>
+<h1 id="executing-the-hello-application">Executing the Hello application</h1>
+<p>You are now ready to execute the app:</p>
+<p><strong>./hello</strong></p>
+<p>You should see output that looks similar to the following:</p>
+<p>Hello example is running...</p>
+<p>Hello Bob!</p>
+<p>Hello Alice!</p>
+<p>Hello Charles!</p>
+<p>Hello example has shut down.</p>
+<p>The order in which the rules get triggered is not deterministic. This is why the output of the program will vary from run to run.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/gaia-platform/gaia-docs/blob/master/articles/tutorials/writing-first-gaia-application.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

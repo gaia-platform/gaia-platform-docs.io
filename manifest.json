@@ -1,0 +1,282 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/gaia-docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html",
+          "hash": "TfNT9pIU5RwvvrvdnzYy7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/gaia-glossary.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/gaia-glossary.html",
+          "hash": "kjezt2qr5w1ljgrh7cfRSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/gaiac-ddl.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/gaiac-ddl.html",
+          "hash": "tQxbCT14+hNwYBOohZ6WfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/getting-started-with-gaia.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/getting-started-with-gaia.html",
+          "hash": "hGY8/iyP2m9VImvcKokeKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/rules-example-cascade.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/rules-example-cascade.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/rules-example-process-flow.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/rules-example-process-flow.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rules-creation-basics.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rules-creation-basics.html",
+          "hash": "lqkDLE/J6bZW++4gqKniCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/rules-development-example.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rules-development-example.html",
+          "hash": "M2/ByfclRRmIeaiNi6eA/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/templates/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/templates/index.html",
+          "hash": "wY1VMMWhVDWvLqws69w9Qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "EmptyTocItemName"
+      ],
+      "type": "Toc",
+      "source_relative_path": "articles/templates/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/templates/toc.html",
+          "hash": "pzP8AIuyxWaXB8IYfXQAkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "igM+VP90Z7kvRGPX51WL5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "EmptyTocItemName"
+      ],
+      "type": "Toc",
+      "source_relative_path": "articles/tutorials/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tutorials/toc.html",
+          "hash": "J/2wYEOPZU+62elmaHccqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/tutorials/writing-first-gaia-application.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tutorials/writing-first-gaia-application.html",
+          "hash": "yuAR90PX3/oHi6nA0V8HOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/gaia-logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/gaia-logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/gaiafav.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/gaiafav.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "BvaDu8gR6Xy8My5W8ECJVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "nRqWkWyDoGqpti+RRCmiEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 9,
+          "skipped_file_count": 8
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

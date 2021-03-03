@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Gaiac and DDL | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Gaiac and DDL | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="gaiac-and-ddl">Gaiac and DDL</h1>
+
+<hr>
+<p><strong>NOTE</strong></p>
+<p>The information contained in this document represents information about prerelease features of the product. Features might change when the product is released for general availability.</p>
+<hr>
+<p>The Gaia Catalog Tool (gaiac) creates the datastore and tables that support your application. It also translates Gaia DDL files into the Gaia headers you include in your ruleset and app code files.</p>
+<h2 id="usage">Usage</h2>
+<p>Usage:gaiac [options] [ddl_file]`</p>
+<p>Command line arguments</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d &lt;dbname&gt;</td>
+<td>Set the database name.</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>Opens gaiac in interactive mode. For more information on the available commands, see the Interactive mode commands section below.</td>
+</tr>
+<tr>
+<td>-g</td>
+<td><p>Generate the Gaia headers and database tables for the specified ddl file.</p> <p>If the -d argument does not specify the database name, gaiac uses the ddl file name as the database name it creates.</p> <p>If the database does not exist, gaiac automatically creates it.<br> If you do not specify a database name or a ddl file, the</p></td>
+</tr>
+<tr>
+<td>-o &lt;path&gt;</td>
+<td>Sets the output path for the generated header files.</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>Print help information.</td>
+</tr>
+<tr>
+<td>&lt;ddl file name&gt;</td>
+<td><p>Specifies the ddl file from which to create database tables.<br> If the -d argument does not specify the database name, gaiac uses the ddl file name as the database name it creates.</p> <p>If the database does not exist, gaiac automatically creates it.</p></td>
+</tr>
+</tbody>
+</table>
+<h2 id="interactive-mode-commands">Interactive mode commands</h2>
+<p>In the interactive mode the following commands are available:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CREATE DATABASE [if not exists] DATABASE_NAME</td>
+<td>Creates a database with the specified database name. If the command succeeds, gaiac returns to the prompt. If the command fails, gaiac returns an error message and returns to the prompt.</td>
+</tr>
+<tr>
+<td>CREATE [if not exists] [DATA_BASE NAME.]TABLE ( &lt;field definitions&gt;)</td>
+<td>Creates a table with the specified name and fields. If the command succeeds, gaiac returns to the prompt. If the command fails, gaiac returns an error message and returns to the prompt. <br> For more information on table specifications, see the CREATE TABLE section below.</td>
+</tr>
+<tr>
+<td>DROP DATABASE NAME</td>
+<td>Removes the database specified by NAME from the catalog.</td>
+</tr>
+<tr>
+<td>DROP TABLE [DATA_BASE NAME.]TABLE_NAME</td>
+<td>Removes the table specified by TABLE_NAME from the specified database specified by TABLE_NAME. If you do not specify a database, the default database '()' is assumed.</td>
+</tr>
+<tr>
+<td>\h</td>
+<td>Print help information.</td>
+</tr>
+<tr>
+<td>\dd [NAME]</td>
+<td>Lists the tables present in the database specified by NAME. If you do not specify a database, tables in the default database '()' are displayed.</td>
+</tr>
+<tr>
+<td>d[t] NAME</td>
+<td>Lists the fields and references in the table specified by NAME.</td>
+</tr>
+<tr>
+<td>\ld [PATTERN]</td>
+<td>Lists the databases in the Gaia catalog. Optionally, you can filter the results by specifying a regex pattern. For more information on regex, see <a href="http://www.cplusplus.com/reference/regex/ECMAScript/%22%3E">ECMAScript syntax</a> on the cplusplus.com website.</td>
+</tr>
+<tr>
+<td>\lf [PATTERN]</td>
+<td>Lists the data fields in the Gaia catalog. Optionally, you can filter the results by specifying a regex pattern. For more information on regex, see <a href="http://www.cplusplus.com/reference/regex/ECMAScript/%22%3E">ECMAScript syntax</a> on the cplusplus.com website.</td>
+</tr>
+<tr>
+<td>\lr [PATTERN]</td>
+<td>Lists the relationships in the Gaia catalog. Optionally, you can filter the results by specifying a regex pattern. For more information on regex, see <a href="http://www.cplusplus.com/reference/regex/ECMAScript/%22%3E">ECMAScript syntax</a> on the cplusplus.com website.</td>
+</tr>
+<tr>
+<td>\l[t] [PATTERN]</td>
+<td>Lists the tables in the Gaia catalog. Optionally, you can filter the results by specifying a regex pattern. For more information on regex, see <a href="http://www.cplusplus.com/reference/regex/ECMAScript/%22%3E">ECMAScript syntax</a> on the cplusplus.com website.</td>
+</tr>
+<tr>
+<td>\q</td>
+<td>Quit</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-definition-language">Data Definition Language</h2>
+<p>The Gaia DDL is similar to SQL since many of the platform features, such as tables, index, and constraints, map naturally to the similar or equivalent relational database features.</p>
+<h3 id="create-table">CREATE TABLE</h3>
+<p>Use the CREATE TABLE command to create a table.</p>
+<pre><code class="lang-sql">CREATE TABLE [if not exists] *table\name* ( [
+{ *fieldname* *datatype* [ *active* ]
+[, ... ]
+] )
+</code></pre>
+<p>The following example creates a table named &quot;department.&quot;</p>
+<pre><code class="lang-sql">CREATE TABLE if not exists department ( name string,current bool active);
+</code></pre>
+<p>Active Fields are Database Column names that you refer to in the body of a Declarative Rule expression. When your declarative code refers to one of these Fields with a read operation, Gaia triggers an Event that schedules the associated Declarative Rules to execute.</p>
+<h3 id="references">REFERENCES</h3>
+<p>Use the REFERENCES keyword to specify a foreign key constraint when creating tables.</p>
+<p>The following example creates a table named &quot;employee.&quot; The &quot;department&quot; field has a foreign key constraint pointing to the department.</p>
+<pre><code class="lang-sql">CREATE TABLE if not exists employee (
+   name string,
+   department references department
+);
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/gaia-platform/gaia-docs/blob/master/articles/gaiac-ddl.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
