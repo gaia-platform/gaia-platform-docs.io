@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/gaia-docs",
+  "source_base_path": "D:/docsbuild",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -49,15 +49,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/getting-started-with-gaia.md",
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-with-gaia.html",
-          "hash": "0WWnczgIrk3Kibn5d6N7NA=="
+          "hash": "GGBFCbH1fBznNDUk2hWlOA=="
         }
       },
       "is_incremental": false,
@@ -138,6 +135,98 @@
     },
     {
       "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/tutorials/gaia-incubator-example.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tutorials/gaia-incubator-example.html",
+          "hash": "rKa2iScdKTxlSVkSIN+byg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-1.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-2.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-3.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-3.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-4.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-4.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-5.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-5.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-6.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-6.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-7.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-7.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
         "EmptyTocItemName"
       ],
       "type": "Toc",
@@ -145,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/toc.html",
-          "hash": "J/2wYEOPZU+62elmaHccqA=="
+          "hash": "LlXkhiZ+L5fVAmsRuwhXBw=="
         }
       },
       "is_incremental": false,
@@ -219,19 +308,17 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "can_incremental": true,
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0,
-        "full_build_reason_code": "NoAvailableBuildCache"
+        "skipped_file_count": 0
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 8,
-          "skipped_file_count": 0
+          "total_file_count": 9,
+          "skipped_file_count": 9
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
