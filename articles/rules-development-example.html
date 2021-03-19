@@ -79,6 +79,10 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="rules-development-example">Rules development example</h1>
 
+<hr>
+<p><strong>NOTE</strong></p>
+<p>The information contained in this document represents information about prerelease features of the product. Features might change when the product is released for general availability.</p>
+<hr>
 <p>This document describes the creation of rules for a sample pallet tracking system.</p>
 <p>You define rules to respond whenever data is changed is committed to the database, whether that is at the row level, or an individual field.</p>
 <h2 id="prerequisites">Prerequisites</h2>
@@ -88,10 +92,7 @@ see <a href="gaiac-ddl.html">Gaiac and DDL</a>.</li>
 <li>A basic understanding of rules and their creation. For more
 information, see <a href="rules-creation-basics.html">Rules creation basics</a>.</li>
 </ul>
-<p>In the design phase for your system, you define the business logic
-that describes how your system operates. After your initial design is
-complete, the architecture of the Gaia Platform lends itself best to the
-following workflow:</p>
+<p>In the design phase for your system, you define the business logic that describes how your system operates. After your initial design is complete, the architecture of the Gaia Platform lends itself best to the following workflow:</p>
 <ul>
 <li>Create a schema for your application.
 <ul>
@@ -143,11 +144,6 @@ id : string,
 function\code : string,
 camera\data\code : string active,
 camera\\loading\area references loading\area
-
-seen\object
-
-id : string,
-seen\object\\camera references camera
 
 pallet
 
@@ -409,19 +405,12 @@ ruleset smartpallet_ruleset
 <li>A function that is the body of the Rule rewritten with 100% C++.</li>
 <li>An additional set of C++ statements that are a contribution to the &quot;well known&quot; initialization function that subscribes this Rule’s  new function to the Event associated with the active fields that are referenced.</li>
 </ol>
-<p>Next question is how does this get executed? Recall that I said this was an active field defined in the schema. That active designation is very important. Writing a Rule that reads an active field causes that Rule to be subscribed to all changes to that field. Whenever this active field is updated and committed in the greeting table, this specific rule iswill be automatically executed. When the Rule is executed, the row that was operated on iswill be delivered to the rule as an automatic parameter. In our example the greetings table is automatically selected based on the fact that the field name my_name is unique and only appears in that table. The my_name reference then is literally referring to the my_name field in the row that was inserted into the greeting table. Since the entire row was passed into the rule, all defined fields from that row are available for use in this rule.</p>
+<p>Next question is how does this get executed? Recall that I said this was an active field defined in the schema. That active designation is very important. Writing a Rule that reads an active field causes that Rule to be subscribed to all changes to that field. Whenever this active field is updated and committed in the greeting table, this specific rule is executed automatically. When the Rule is executed, the row that was operated on iswill be delivered to the rule as an automatic parameter. In our example the greetings table is automatically selected based on the fact that the field name my_name is unique and only appears in that table. The my_name reference then is literally referring to the my_name field in the row that was inserted into the greeting table. Since the entire row was passed into the rule, all defined fields from that row are available for use in this rule.</p>
 </article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/gaia-platform/gaia-docs/blob/master/articles/rules-development-example.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
-                </ul>
-              </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
                 <h5>In This Article</h5>
                 <div></div>
