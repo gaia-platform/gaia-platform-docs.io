@@ -14,35 +14,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "README.md",
-      "output": {
-        ".html": {
-          "relative_path": "README.html",
-          "hash": "qKKsMWrimPdL8ko0QN0HBw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "api/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "api/index.html",
-          "hash": "K6yZIRbsXobxrU2CYpamkg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "articles/gaia-glossary.md",
       "output": {
         ".html": {
           "relative_path": "articles/gaia-glossary.html",
-          "hash": "3VmiW41Kcj6pWt4Zac6LYg=="
+          "hash": "kjezt2qr5w1ljgrh7cfRSQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/gaiac-ddl.html",
-          "hash": "4iCzQlTydpw9Vxt9/48P/g=="
+          "hash": "tQxbCT14+hNwYBOohZ6WfQ=="
         }
       },
       "is_incremental": false,
@@ -66,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-with-gaia.html",
-          "hash": "GGBFCbH1fBznNDUk2hWlOA=="
+          "hash": "hGY8/iyP2m9VImvcKokeKQ=="
         }
       },
       "is_incremental": false,
@@ -100,22 +76,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/rules-creation-basics.html",
-          "hash": "3374kzekFKaIZ0xK82qfGg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
-      "type": "Conceptual",
-      "source_relative_path": "articles/rules-development-example.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/rules-development-example.html",
-          "hash": "7guO8PwETObodsRyBKEeHg=="
+          "hash": "lqkDLE/J6bZW++4gqKniCQ=="
         }
       },
       "is_incremental": false,
@@ -127,7 +88,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/templates/index.html",
-          "hash": "FyC/kSiU6ZCu6zBEp3w7OQ=="
+          "hash": "wY1VMMWhVDWvLqws69w9Qg=="
         }
       },
       "is_incremental": false,
@@ -154,7 +115,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "MaexWw7/tWERrnY3otky4w=="
+          "hash": "nwseH3bTAh/wExitE4yxmA=="
         }
       },
       "is_incremental": false,
@@ -184,7 +145,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/writing-first-gaia-application.html",
-          "hash": "I4dRNXNheDki6M9cdFY4DQ=="
+          "hash": "yuAR90PX3/oHi6nA0V8HOA=="
         }
       },
       "is_incremental": false,
@@ -213,12 +174,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "SAkrcEZXMEs6ybmuwl30Zg=="
+          "hash": "BvaDu8gR6Xy8My5W8ECJVA=="
         }
       },
       "is_incremental": false,
@@ -252,8 +216,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 10,
-          "skipped_file_count": 9
+          "total_file_count": 7,
+          "skipped_file_count": 7
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
