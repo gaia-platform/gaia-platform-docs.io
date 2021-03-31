@@ -94,7 +94,7 @@
 <li>A machine that supports the x86-64 architecture.</li>
 </ul>
 <p>If you don't currently have cmake and clang installed, you can use the following commands to install them:</p>
-<p><strong>sudo apt update &amp;&amp; apt upgrade &amp;&amp; apt install cmake clang</strong></p>
+<p><strong>sudo apt update &amp;&amp; apt upgrade &amp;&amp; sudo apt install cmake clang</strong></p>
 <h2 id="download-the-gaia-package">Download the Gaia package</h2>
 <p>The Gaia SDK is delivered as a Debian software package (DEB).</p>
 <p><strong>gaia-0.1.0_amd64.deb</strong></p>
@@ -159,8 +159,8 @@ command:</p>
 <p>To start the server on Ubuntu and run it in the background on WSL2 (Gaia has not been tested on WSL1):</p>
 <p><strong>gaia_db_server --data-dir ~/.local/gaia/db &amp;</strong></p>
 <h2 id="build-and-run-the-incubator-example">Build and run the incubator example</h2>
-<p>You can verify that the Gaia SDK is installed properly by building and running the incubator demo. The source code for the incubator example is located in the /opt/gaia/examples/incubator_demo folder.</p>
-<p><strong>Note</strong>: If you encounter issues building and running the demo, the incubator_demo folder contains a file named README.md. This document lists some of the common issues that you can encounter and suggested solutions.</p>
+<p>You can verify that the Gaia SDK is installed properly by building and running the incubator demo. The source code for the incubator example is located in the /opt/gaia/examples/incubator folder.</p>
+<p><strong>Note</strong>: If you encounter issues building and running the demo, the incubator folder contains a file named README.md. This document lists some of the common issues that you can encounter and suggested solutions.</p>
 <p>Before you can build the incubator example, you must run cmake to build the makefiles for the example. To run cmake against the supplied CMakeLists.txt file that is installed with the Package:</p>
 <ol>
 <li><p>Copy the incubator demo into your folder:</p>
@@ -173,17 +173,17 @@ command:</p>
 <p>To build and run the incubator example:</p>
 <ol>
 <li><p>Complete setup of the build environment by issuing the following
-commands:
-<strong>mkdir build
-cd build
-cmake ..
-make</strong></p>
+commands:</p>
+<p><strong>mkdir build</strong><br>
+<strong>cd build</strong><br>
+<strong>cmake ..</strong><br>
+<strong>make</strong></p>
 </li>
 <li><p>When the build finishes, use the following command to run the
 example:</p>
+<p><strong>./incubator sim</strong></p>
 </li>
 </ol>
-<p><strong>./incubator sim</strong></p>
 <p>Use the menu to start, stop, show, and access the other functions of the simulation.</p>
 <p>To monitor the incubator simulation, open another terminal window. Navigate to the build folder and run the following command:</p>
 <p><strong>watch -n 1 ./incubator show</strong></p>
