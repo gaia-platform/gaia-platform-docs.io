@@ -133,12 +133,12 @@ make</strong></p>
 <p>In your first terminal window, run the command:</p>
 <p><strong>./incubator sim</strong></p>
 <p>When the demo starts, it displays the following menu:</p>
-<p><img src="images/incubator-example-1.png" alt=""></p>
+<p><img src="images%5Cincubator-example-1.png" alt=""></p>
 <p>To start the simulation, select <strong>b</strong>.</p>
 <p>In the second terminal window, run the command:</p>
 <p><strong>watch -n .5 ./incubator show</strong></p>
 <p>This command dumps the contents of the incubators' state and their sensors and fans to the screen. The output will appear similar to the following:</p>
-<p><img src="images/incubator-example-2.png" alt=""></p>
+<p><img src="images%5Cincubator-example-2.png" alt=""></p>
 <p>The output shows the incubator and components being monitored. For each of the temperature sensors and fan actuators, the output displays a timestamp in the second column and the current temperature or fan actuator speed in the third column.</p>
 <p>As the simulation runs, the temperature in both incubators tends to increase. To counteract the environment getting too hot for your chickens and puppies, Gaia invokes logic to turn on the fan actuators. Let's look at how this is accomplished.</p>
 <h3 id="how-the-incubator-demo-works">How the incubator demo works</h3>
@@ -182,7 +182,7 @@ OnUpdate(field1, field2, field3)</li>
 <p>The rule uses the <code>OnUpdate()</code> attribute to watch for changes to the sensor.value, incubator.max_temp, incubator.min_temp fields.</p>
 <p>The second <em>if block</em> tells Gaia to check if a value field in the sensor table is greater or equal than the max_temp field in the incubator table. If this is true, then it means that the incubator is too hot, and we need to turn on the fan actuator. We do this by assigning a new value to the actuator table, as seen in the if block's body.</p>
 <p>You can see this behavior carried out by starting the simulation. When the temperature sensors exceed the maximum temperature value, the fan actuator value changes from 0 to 500.</p>
-<p><img src="images/incubator-example-3.png" alt=""></p>
+<p><img src="images%5Cincubator-example-3.png" alt=""></p>
 <p>The rule fires whenever the temperature value changes, which means that the fan actuator might increase its speed several times. It can even increase fast enough to drive the temperature of the incubator below the specified minimum value. But this is okay. The <em>else if</em> block in the ruleset contains the necessary logic to reduce the fan actuator speed if it falls below the minimum temperature.</p>
 <p>Additionally, since the Gaia Platform understands your schema and how your tables are related, the rule is reading all the sensors' values in each incubator and setting the value for all the actuators in each incubator. In this example, each incubator is related to a set of sensors and actuators.</p>
 <p>So far, we've focused on changes to the sensor.value field. But we also have an incubator.max_temp or incubator.min_temp field. What if we wanted to change the temperature range of our incubator? Would Gaia be able to respond to this as well? The answer is yes. In this example, sensor.value, incubator.max_temp, and incubator.min_temp are all Active Fields.</p>
@@ -195,11 +195,11 @@ OnUpdate(field1, field2, field3)</li>
 <li>To drive the execution of the rule described above, set the new max_temp value to one that is less than the current sensor value. For example, if the puppy incubator temperature is reading 92, set  the max_temp value to 90.</li>
 </ol>
 <p>Now, when you monitor the incubators, you will see that Gaia increments the fan actuator values when the temperature exceeds the new maximum temperature.</p>
-<p><img src="images/incubator-example-4.png" alt=""></p>
+<p><img src="images%5Cincubator-example-4.png" alt=""></p>
 <p>Before submitting the new max_temp, your tables should look like this.</p>
-<p><img src="images/incubator-example-5.png" alt=""></p>
+<p><img src="images%5Cincubator-example-5.png" alt=""></p>
 <p>After you submit the new max value, both fan actuators associated with the incubator immediately start increasing their speed, like so:</p>
-<p><img src="images/incubator-example-6.png" alt=""></p>
+<p><img src="images%5Cincubator-example-6.png" alt=""></p>
 <p>This application of the rule functions on the same principle as in the first example. The difference is that the change that triggers the rule is caused by our intervention rather than the changes driven by the environment.</p>
 <p>In the first example, changes in sensor.value caused the rule to fire and to compare the updated sensor.value against the current value of max_temp. In this example, you changed the value of max_temp which caused the rule to fire and compare the current value sensor.value against the updated value of max_temp.</p>
 <p>It is also worth observing that in this case, more than one fan actuator was associated with the incubator and both fan actuators had their speeds increased. The way that we have defined our Gaia data tables means actuators refer back to the incubator. Gaia is aware of this connection and can apply fan actuator increase logic to all the actuators associated with the puppies incubator.</p>
@@ -224,7 +224,7 @@ OnUpdate(field1, field2, field3)</li>
 <p>There are several variables in the conditional. The primary active variable is the actuator.value field. This means that changes to the fan actuator speed trigger the rule. You will also notice two other variables from the prior rule, sensor.value and incubator.max_temp. However, these fields are not listed in the <code>OnUpdate()</code> attribute and therefore do not cause the rule to fire.</p>
 <p>We can now review how the first rule and the just-introduced rule will interact. As you recall, the first rule is triggered by a change in the sensor.value field and results in the modification of the actuator.value field. This change now immediately causes Gaia to check the conditions described in Rule 3. This is forward chaining in action.</p>
 <p>To see this behavior, return to the simulation controller and allow the incubator to heat up considerably beyond its maximum temperature. To do this, after starting the simulation, select manage incubators from the menu, select an incubator and enter the command to turn off the power. This forces the incubator to stop actuating the fans (allowing the environment to heat up).</p>
-<p><img src="images/incubator-example-7.png" alt=""></p>
+<p><img src="images%5Cincubator-example-7.png" alt=""></p>
 <p>Wait until the temperature of the incubator exceeds the maximum temperature range by a few degrees. When it does, enter the command to turn the incubator power back on. The associated fan actuator speed values start climbing in increments of 500. When the fan actuator speed reaches 3500, there is a jump to 5000 - a sudden change of 1500. This sudden jump is caused by the firing of rule 1 modifying the actuator.value (fan actuator speed) which triggers the immediate firing of rule 3. Use forward chaining to build out complex application behavior.</p>
 </article>
           </div>

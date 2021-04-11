@@ -193,7 +193,7 @@
 <p>The following example creates a table named &quot;department.&quot;</p>
 <pre><code class="lang-sql">CREATE TABLE if not exists department ( name string,current bool active);
 </code></pre>
-<p>Active Fields are Database Column names that you refer to in the body of a Declarative Rule expression. When your declarative code refers to one of these Fields with a read operation, Gaia triggers an Event that schedules the associated Declarative Rules to execute.</p>
+<p>Active Fields are Database Column names that you refer to in the body of a Declarative Rule expression. When your declarative code refers to one of these Fields with a read operation, Gaia fires an Event that schedules the associated Declarative Rules to execute.</p>
 <h3 id="references">REFERENCES</h3>
 <p>Use the REFERENCES keyword to specify a foreign key constraint when creating tables.</p>
 <p>The following example creates a table named &quot;employee.&quot; The &quot;department&quot; field has a foreign key constraint pointing to the department.</p>

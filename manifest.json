@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/gaiac-ddl.html",
-          "hash": "4iCzQlTydpw9Vxt9/48P/g=="
+          "hash": "hwiGc+LOAwlzTHZpBFz7cQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-with-gaia.html",
-          "hash": "GGBFCbH1fBznNDUk2hWlOA=="
+          "hash": "UCJYRBYXYiwkuK8SSJeRmg=="
         }
       },
       "is_incremental": false,
@@ -88,7 +88,29 @@
       "output": {
         ".html": {
           "relative_path": "articles/rules-creation-basics.html",
-          "hash": "3374kzekFKaIZ0xK82qfGg=="
+          "hash": "cGJZB77jzMNNyYMUxtS7XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/templates/images/smartpallet-template-image1.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/templates/images/smartpallet-template-image1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/templates/images/smartpallet-template-image2.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/templates/images/smartpallet-template-image2.png"
         }
       },
       "is_incremental": false,
@@ -100,7 +122,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/templates/index.html",
-          "hash": "FyC/kSiU6ZCu6zBEp3w7OQ=="
+          "hash": "5SWtz4BqNCuamcpa8YvhsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/templates/smartpallet-template.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/templates/smartpallet-template.html",
+          "hash": "ZDlmUWBvcDf17IJEp2PwzQ=="
         }
       },
       "is_incremental": false,
@@ -115,7 +149,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/templates/toc.html",
-          "hash": "pzP8AIuyxWaXB8IYfXQAkQ=="
+          "hash": "CHqtSMy6qiN4TnQBJgVaTQ=="
         }
       },
       "is_incremental": false,
@@ -317,7 +351,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 9,
+          "total_file_count": 10,
           "skipped_file_count": 9
         },
         "ResourceDocumentProcessor": {
