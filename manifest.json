@@ -95,46 +95,12 @@
       "version": ""
     },
     {
-      "type": "Resource",
-      "source_relative_path": "articles/templates/images/smartpallet-template-image1.png",
-      "output": {
-        "resource": {
-          "relative_path": "articles/templates/images/smartpallet-template-image1.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "articles/templates/images/smartpallet-template-image2.png",
-      "output": {
-        "resource": {
-          "relative_path": "articles/templates/images/smartpallet-template-image2.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
       "type": "Conceptual",
       "source_relative_path": "articles/templates/index.md",
       "output": {
         ".html": {
           "relative_path": "articles/templates/index.html",
-          "hash": "5SWtz4BqNCuamcpa8YvhsA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/templates/smartpallet-template.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/templates/smartpallet-template.html",
-          "hash": "ZDlmUWBvcDf17IJEp2PwzQ=="
+          "hash": "9Sl0OIMmkNxud033/GsJQA=="
         }
       },
       "is_incremental": false,
@@ -149,7 +115,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/templates/toc.html",
-          "hash": "CHqtSMy6qiN4TnQBJgVaTQ=="
+          "hash": "gzbwf/AELYrH1baMUTVIlQ=="
         }
       },
       "is_incremental": false,
@@ -351,7 +317,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 10,
+          "total_file_count": 9,
           "skipped_file_count": 9
         },
         "ResourceDocumentProcessor": {
