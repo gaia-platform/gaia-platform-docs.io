@@ -96,6 +96,51 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "articles/templates/baggageadvisor-template.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/templates/baggageadvisor-template.html",
+          "hash": "HROjwWlW1xj8VHKW3A1KEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/templates/images/baggageadvisor-template-image1-old.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/templates/images/baggageadvisor-template-image1-old.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/templates/images/baggageadvisor-template-image1.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/templates/images/baggageadvisor-template-image1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/templates/images/baggageadvisor-template-image2.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/templates/images/baggageadvisor-template-image2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/templates/index.md",
       "output": {
         ".html": {
@@ -115,7 +160,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/templates/toc.html",
-          "hash": "gzbwf/AELYrH1baMUTVIlQ=="
+          "hash": "SlbNrmdDe7N4qKfeyFYdFQ=="
         }
       },
       "is_incremental": false,
@@ -317,7 +362,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 9,
+          "total_file_count": 10,
           "skipped_file_count": 9
         },
         "ResourceDocumentProcessor": {
