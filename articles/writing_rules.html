@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Writing Rules with Gaia Declarative C++ | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Writing Rules with Gaia Declarative C++ | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="writing-rules-with-gaia-declarative-c">Writing Rules with Gaia Declarative C++</h1>
+
+<p>Gaia rules are written in Declarative C++. Gaia Declarative C++ differs from traditional C++ in several ways:</p>
+<ul>
+<li>It operates on database field references as well as local variables.</li>
+<li>The Gaia platform determines the execution order.</li>
+<li>Implicit queries. A single statement in a declarative statement can result in iteration over all of the records in a one-to-many relationship.</li>
+<li>Iteration takes place over the entire Ruleset.</li>
+</ul>
+<p>In Gaia, rules and records are directly connected. What looks like variables are actually references to fields in specific database rows; there is no need to declare the variables. In a rule, data that resides in the Gaia database are field references. When data changes in the database, Rules that deal with that data are executed automatically.</p>
+<p>Field references do not have type declarations in a Ruleset; the translation engine automatically supplies the Database Schema definitions. In the declarative language environment, you reference fields by simplified names, which Gaia converts into code-based
+accessors. Depending on the relationships in your schema, the field reference can return 0,1, or multiple rows. In the case in which the return is multiple rows.</p>
+<p>In addition to the Ruleset level declarations, you can declare any number of local variables at the start of a specific Rule using standard C++ syntax, such as <em>int BagCount</em>. Local variables are scoped to individual rules, not to Rulesets.</p>
+<p>Picture an application that manages airplane flights, passengers, and baggage. There is a table that tracks actual flights. At the end of each flight, the unique record for that flight has a field called FlightMiles to reflect the miles flown in the flight. In another table, there is a record for each traveler reflecting MemberMiles.</p>
+<p>You might also find that as rules grow more complex, the OnXxxx() prefix aids in readability and understanding among different developers.</p>
+<p>Let’s start with four simple rules based on the following schema:</p>
+<p><img src="images/flight-schema.png" alt=""></p>
+<p>Member Rule 1</p>
+<pre><code class="lang-cpp">// Update the number of miles the member has flown
+{
+    MemberMiles += @FlightMiles;
+}
+</code></pre>
+<p>The key to understanding this Rule is that FlightMiles is designated as an Active Field. When that field is updated, the Rule engine automatically fires the rule.</p>
+<p>Each flight has many passengers. There is a 1:many relationship between the Flight record in the database, which contains FlightMiles, and the Traveler record, which contains MemberMiles. The rules engine recognizes that relationship from the Catalog and automatically executes the Rule for every passenger on the flight. So, that one assignment causes the system to:</p>
+<ul>
+<li>Recognize that there are many passengers on the flight.</li>
+<li>Create a query to find all the passengers on this flight; the Rule is then fired once for each passenger. We call this an implicit query.</li>
+<li>Starting from the Flight record, navigate to the correct Traveler record in that table for each passenger. Even here, the rules engine is automatically navigating through several intermediate records to get from Flight to Traveler.</li>
+<li>Complete the update for every passenger. Implicit queries cause rules to execute against sets of records completely transparently and automatically.</li>
+</ul>
+<p>Member Rule 2</p>
+<pre><code class="lang-cpp">// Update member status
+{
+    if ( @MemberMiles &amp;gt; 75000 ) { MembershipLevel = Silver };
+}
+</code></pre>
+<p>In this example, MemberMiles is an Active Field. The rules engine automatically fires the Rule each time MemberMiles changes. The previous changes the value of the field and causes the rules engine to fire this rule. This is forward chaining which we discuss further in the next section.</p>
+<p>We track each trip in a table called Trips which has a counter for TripSegments. How do we know a segment is complete? One answer could be to add a field in Flights called FlightLanded. Then we could write:</p>
+<pre><code class="lang-cpp">{
+   if (@FlightLanded) { TripSegments +=1}
+}
+</code></pre>
+<p>Before moving on, let’s examine what is taking place with both of these conditional statements. A flight segment was completed. An Active Field caused the rules engine to fire a rule. That Rule relates to a particular record for a particular flight. That record, in turn, is related to many Trip records. Not only that, the path from the flight record to the appropriate trip record involves navigating through an intermediate segment record. We start with a simple one statement conditional and end up with:</p>
+<ul>
+<li>A query is automatically generated to relate the flight record to all the appropriate segment records.</li>
+<li>The Rule is executed once for each of the many trips associated with this flight.</li>
+<li>The system navigates through the segment record in each case, which fires the event to update the SegmentsFlown.</li>
+</ul>
+<pre><code class="lang-cpp">// Track weight of baggage loaded on flight
+OnInsert(BaggageLoadScan)
+{
+    FlightWeight += Weight
+}
+</code></pre>
+<p>In this case, the Rule is defined using the OnInsert prefix.</p>
+<pre><code class="lang-cpp">// Check for overweight situation and raise the alarm
+{
+    If (@FlightWeight &amp;gt; MaxWeight )
+       { ActivateWeightAlarm(FlightWeight) }
+}
+</code></pre>
+<p>Since rules are, at their core, C++ statements, you can call functions that perform external actions from the body of the rule. In the preceding rules, as luggage is loaded into the plane, luggage tags are scanned. The first Rule tracks the weight of the baggage loaded on the flight.</p>
+<p>Through forward chaining, the rules system fires the second Rule each time the value of FlightWeight changes. If the value of FlightWeight exceeds the maximum allowed baggage weight, the Rule calls the ActivateWeightAlarm method, which is external to the rules declarations.</p>
+<h2 id="forward-chaining">Forward chaining</h2>
+<p>When the value of a field reference changes in the active database, the Rule is fired automatically. As rules get fired, they might also change fields, and those fields can, in turn, fire other rules. We call this
+forward chaining. The combination of rules firing automatically and then cascading to the execution of other rules is the basis for our declarative system.</p>
+<p>Sometimes when a field reference changes, a Rule executes against individual records. In other cases, though, a Rule might update many records. For example, after a flight lands, all the luggage might be marked as arrived. The rules engine generates the underlying query to make this work automatically so that you don’t have to. We call this an implicit query. This is a key part of eliminating control flow.</p>
+<p>The power derives from the fact that there is no need to create queries, navigate through tables, copy and map data: Gaia handles all of that automatically. Because the database, the records, and the fields are intrinsically shared, updates are automatically shared with other parts of the application in the same copy-free fashion, making the database active. By consistently using the term fields instead of, say, variables, we are constantly reminded of this direct linkage to the records they live in.</p>
+<h2 id="transactions">Transactions</h2>
+<p>Transactions are complex to think about in a world with forward chaining since cascading rules, particularly across multiple Rulesets and authors, a transaction could go on forever. For this reason, the Gaia platform focuses on the use of transactions to ensure the consistency of relatively limited operations.</p>
+<p>The rules engine automatically brackets every Rule with a Begin and Commit Transaction sequence. All forward chaining takes place after the transaction is committed.</p>
+<p>When a transaction aborts, usually due to a conflict with another transaction. For example, two concurrent transactions might change the same field value. In this case, the first one to commit 'wins,’ and the second one must re-execute.</p>
+<p>In the declarative system, rules based on field changes are the only mechanism for moving from one Rule to the next; there is no explicit control flow. A single rule, particularly if it has multiple statements, might cause several other rules to fire. The rules engine waits for field changes within the bracketed transaction to be committed before allowing associated forward chaining to happen.</p>
+<h2 id="parallelism">Parallelism</h2>
+<p>Gaia automatically executes all rules in parallel by default. This is made possible by the Rules Engine’s managed execution environment and the implementation of transactions in the Database itself.</p>
+<p><strong>Important</strong>: Be careful when using objects that have a shared mutable state, such as static variables. There are no protections to prevent all the usual race conditions, timing, and visibility issues common in procedural programming. In short, all multithreading best practices apply when dealing with procedural code.</p>
+<p>There are two mechanisms available to control this behavior. Primarily you can add the SerialStream(stream-name) attribute to a Ruleset to force all rules in that Ruleset to execute in a serialized fashion. Rules in Rulesets with a common stream-name never run in parallel with each other. But, be aware that serialized rules are not guaranteed to run in the same hardware thread; this means that writing code that relies on data persistence is not recommended.</p>
+<p>For applications requiring a single-threaded approach, you can specify the number of threads that Gaia uses to process rules. To guarantee single-threaded semantics are applied, set thread_pool_count to 1 in the gaia.config file.</p>
+<p>If a transaction fails due to a concurrent transaction exception, the rules engine retries the transaction. You can configure the number of retries for a transaction, and if Gaia should not retry a transaction, you can set rule_retry_count to 0.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

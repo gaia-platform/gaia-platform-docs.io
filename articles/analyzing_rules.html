@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>API Reference | Gaia Platform Documentation </title>
+    <title>Analyzing your rules | Gaia Platform Documentation </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="API Reference | Gaia Platform Documentation ">
+    <meta name="title" content="Analyzing your rules | Gaia Platform Documentation ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../images/gaiafav.ico">
@@ -77,9 +77,93 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="api-reference">API Reference</h1>
+<h1 id="analyzing-your-rules">Analyzing your rules</h1>
 
-<p>Coming soon.</p>
+<h2 id="rule-statistics">Rule Statistics</h2>
+<p>The rules engine logs statistics according to settings in the
+`gaia.conf` configuration. The following options determining logging
+behavior:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default if Unspecified</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stats_log_interval</td>
+<td>10 seconds</td>
+<td>The interval in seconds for how frequently the rules engine logs statistics. All stats (counts, averages, etc) are calculated anew for each interval.</td>
+</tr>
+<tr>
+<td>log_individual_rule_stats</td>
+<td>False</td>
+<td>If set to true, then in addition to rollup statistics for all rules, the same statistics are calculated for each rule.</td>
+</tr>
+</tbody>
+</table>
+<p>Here is sample output when of the rule_stats log when individual rule
+statistics are not collected:</p>
+<pre><code>2020-11-30T15:15:37 30026 &lt;rules_stats&gt;;: 
+------------------------- sched invoc pend aband retry excep avg lat max
+lat avg exec max exec
+
+2020-11-30T15:15:37 30026 &lt;rules_stats&gt;;: thread load:
+0.49 % 21 21 0 0 0 0 15.26 ms 23.59 ms 1.46 ms 9.31 ms
+
+2020-11-30T15:15:47 30026 &lt;rules_stats&gt;;: thread load:
+0.65 % 30 30 0 0 0 0 13.66 ms 19.66 ms 0.28 ms 7.01 ms
+</code></pre>
+<p>For example, the first data row shows that 21 rules were scheduled and
+21 rules were invoked.</p>
+<p>If individual rule statistics are turned on, sample output might look
+like:</p>
+<pre><code>2020-11-30T15:13:25 28975 &lt;rules_stats&gt;:
+------------------------- sched invoc pend aband retry excep avg lat max
+lat avg exec max exec
+
+2020-11-30T15:13:25 28975 &lt;rules_stats&gt;: thread load:
+0.73 % 28 28 0 0 0 1 15.11 ms 24.91 ms 0.74 ms 10.61 ms
+
+2020-11-30T15:13:25 28975 &lt;rules_stats&gt;;:
+incubator_ruleset::1_sensor 27 27 0 0 0 1 15.25 ms 24.91 ms 0.77 ms
+10.61 ms
+
+2020-11-30T15:13:25 28975 &lt;rules_stats&gt;;:
+incubator_ruleset::3 1 1 0 0 0 0 11.30 ms 11.30 ms 0.01 ms 0.01 ms
+</code></pre>
+<p>Here we see that of the 28 scheduled/invocations in this time interval, the rules engine invoked <strong>incubator_ruleset::1_sensor</strong>  27 times and <strong>incubator_ruleset::3</strong> once.</p>
+<h2 id="rule-tracing">Rule Tracing</h2>
+<p>To display the rules traces to the console, edit your <em>gaia_log.conf</em> file and add the following entry:</p>
+<pre><code>logger
+name = &quot;rules&quot;
+sinks = &quot;console&quot;,
+&quot;file_rotating&quot;
+level = &quot;trace&quot;
+</code></pre>
+<p>Sample output from on console will appear similar to the following:</p>
+<pre><code>2020-11-30T15:35:33-08:00 trace 30862 30878 &lt;rules&gt;:
+call: incubator_ruleset::1_sensor
+
+2020-11-30T15:35:33-08:00 trace 30862 30874 &lt;rules&gt;:
+call: incubator_ruleset::1_sensor
+
+2020-11-30T15:35:33-08:00 trace 30862 30878 &lt;rules&gt;:
+return: incubator_ruleset::1_sensor
+
+2020-11-30T15:35:33-08:00 trace 30862 30874 &lt;rules&gt;:
+return: incubator_ruleset::1_sensor
+</code></pre>
+<p>Note that the first number following &quot;trace&quot; is the process id. The
+second number is the thread id.</p>
+<p>If an exception occurs, the tracing displays output similar to the
+following:</p>
+<pre><code>2020-11-30T15:46:34-08:00 trace 31036 31068 &lt;rules&gt;:
+exception: incubator_ruleset::2, The rules engine has not been
+initialized yet.
+</code></pre>
 </article>
           </div>
           

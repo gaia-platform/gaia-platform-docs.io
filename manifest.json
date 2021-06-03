@@ -18,7 +18,31 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "K6yZIRbsXobxrU2CYpamkg=="
+          "hash": "QCLK9muqHxONvj0tIO24aA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "k2wjKN+y9/ALtFOsAmGUIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/analyzing_rules.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/analyzing_rules.html",
+          "hash": "VzgFww1o4bQoMFzCLpBmiQ=="
         }
       },
       "is_incremental": false,
@@ -31,6 +55,30 @@
         ".html": {
           "relative_path": "articles/gaia-glossary.html",
           "hash": "3VmiW41Kcj6pWt4Zac6LYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/gaia_programming_model.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/gaia_programming_model.html",
+          "hash": "/f9sUV4cwu2cosainFdN4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/gaia_rulesets.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/gaia_rulesets.html",
+          "hash": "4oPecQsbOD6AVdSDn/jeHQ=="
         }
       },
       "is_incremental": false,
@@ -55,6 +103,17 @@
         ".html": {
           "relative_path": "articles/getting-started-with-gaia.html",
           "hash": "MogDmL6v6pSNAh8wdY5PTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/flight-schema.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/flight-schema.png"
         }
       },
       "is_incremental": false,
@@ -108,17 +167,6 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "articles/templates/images/baggageadvisor-template-image1-old.png",
-      "output": {
-        "resource": {
-          "relative_path": "articles/templates/images/baggageadvisor-template-image1-old.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
       "source_relative_path": "articles/templates/images/baggageadvisor-template-image1.png",
       "output": {
         "resource": {
@@ -152,15 +200,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "EmptyTocItemName"
-      ],
       "type": "Toc",
       "source_relative_path": "articles/templates/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/templates/toc.html",
-          "hash": "SlbNrmdDe7N4qKfeyFYdFQ=="
+          "hash": "5qPv7Y28c3obcDomk/jESA=="
         }
       },
       "is_incremental": false,
@@ -172,22 +217,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "ybB423oNPWG94ekS/7w1Lw=="
+          "hash": "1OJvK00tQ8Ast3KFJwCklQ=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/tutorials/gaia-incubator-example.md",
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/gaia-incubator-example.html",
-          "hash": "rKa2iScdKTxlSVkSIN+byg=="
+          "hash": "O32GKchP0rMnYutsJTbtQA=="
         }
       },
       "is_incremental": false,
@@ -271,30 +313,36 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "EmptyTocItemName"
-      ],
       "type": "Toc",
       "source_relative_path": "articles/tutorials/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/toc.html",
-          "hash": "LlXkhiZ+L5fVAmsRuwhXBw=="
+          "hash": "mDzD0k5JswPAUK8Zv9wgxQ=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/tutorials/writing-first-gaia-application.md",
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/writing-first-gaia-application.html",
-          "hash": "I4dRNXNheDki6M9cdFY4DQ=="
+          "hash": "LCBOAj2V8lVhZ2iLBHAVEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/writing_rules.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/writing_rules.html",
+          "hash": "SMAXgVaoLtV2dhFGYdGE7g=="
         }
       },
       "is_incremental": false,
@@ -343,7 +391,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "nRqWkWyDoGqpti+RRCmiEQ=="
+          "hash": "TVWHz9NDRs1fAnH2KTywdw=="
         }
       },
       "is_incremental": false,
@@ -362,8 +410,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 10,
-          "skipped_file_count": 9
+          "total_file_count": 14,
+          "skipped_file_count": 13
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
