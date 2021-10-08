@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>create table | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="create table | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../images/gaiafav.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<hr>
+<p><strong>NOTE</strong></p>
+<p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
+<hr>
+<h1 id="create-table">create table</h1>
+<p>Creates a new table. If the table already exists, gaiac returns an error and the table is not created.</p>
+<pre><code>[CREATE] TABLE [if not exists] table_name ( [
+{ fieldname datatype [UNIQUE]
+[, ... ]
+] );
+</code></pre>
+<p>The if not exists operator is optional. If a table with the same name already exists, the command is ignored. However, there is no verification that the existing table has a structure identical to that indicated by the create table statement.</p>
+<p>The fieldname parameter specifies the name of a field in the table.</p>
+<p>The datatype parameter specifies the type of data the field holds (e.g. varchar, integer, date, etc.).</p>
+<p>Valid data types are:</p>
+<ul>
+<li>bool - Boolean data type</li>
+<li>int8 - 8-bit integer</li>
+<li>Uint8 - unsigned 8-bit integer</li>
+<li>Int16 - 16-bit integer</li>
+<li>uint16 - unsigned 16-bit integer</li>
+<li>int32 - 32-bit integer</li>
+<li>uint32 - unsigned 32-bit integer</li>
+<li>int64 - 64-bit integer</li>
+<li>uint64 - unsigned 64-bit integer</li>
+<li>float - signed 4-byte floating-point number</li>
+<li>double - signed 8-byte floating-point number</li>
+<li>string - A null-terminated vector of bytes up to the limit of the available payload. Typically ASCII or utf-8.</li>
+</ul>
+<p>Remarks</p>
+<p>Use the optional `if not exists' to prevent an error from occurring if the table exists. If a table with the same name already exists, the command is ignored. However, there is no verification that the existing table has a structure identical to that indicated by the CREATE TABLE statement.</p>
+<p>The short form of the <code>create table</code> statement, in which you omit the create operator, drops the table before attempting to create it and has the same effect as the following:</p>
+<p><code>drop table if exists table_nam; create table table_name;</code></p>
+<p>The following example creates a table named &quot;department.&quot;</p>
+<p>CREATE TABLE if not exists department ( name string, current bool active);</p>
+<p>Use the interactive feature of gaiac to list the instantiated tables:</p>
+<pre>
+gaiac> \lt
++-----------+-------------------+-----+------------+
+| Database  | Name              | ID  | Type       |
++-----------+-------------------+-----+------------+
+| catalog   | gaia_database     | 2   | 4294967291 |
++-----------+-------------------+-----+------------+
+| catalog   | gaia_table        | 4   | 4294967294 |
++-----------+-------------------+-----+------------+
+| catalog   | gaia_field        | 11  | 4294967295 |
++-----------+-------------------+-----+------------+
+| catalog   | gaia_relationship | 19  | 4294967290 |
++-----------+-------------------+-----+------------+
+| catalog   | gaia_ruleset      | 31  | 4294967292 |
++-----------+-------------------+-----+------------+
+| catalog   | gaia_rule         | 37  | 4294967293 |
++-----------+-------------------+-----+------------+
+| event_log | event_log         | 41  | 4294963200 |
++-----------+-------------------+-----+------------+
+| hello     | names             | 126 | 9          |
++-----------+-------------------+-----+------------+
+| hello     | greetings         | 128 | 10         |
++-----------+-------------------+-----+------------+
+| hello     | another_table     | 131 | 11         |
++-----------+-------------------+-----+------------+
+| catalog   | gaia_index        | 134 | 4294967289 |
++-----------+-------------------+-----+------------+
+| flights   | airplane          | 141 | 9          |
++-----------+-------------------+-----+------------+
+| flights   | route             | 144 | 10         |
++-----------+-------------------+-----+------------+
+| flights   | flight            | 147 | 11         |
++-----------+-------------------+-----+------------+
+| flights   | segment           | 154 | 12         |
++-----------+-------------------+-----+------------+
+| flights   | trip              | 158 | 13         |
++-----------+-------------------+-----+------------+
+| flights   | traveller         | 161 | 14         |
++-----------+-------------------+-----+------------+
+</pre>
+<p>Gaia provides two ways to connect data in your tables:</p>
+<ul>
+<li>Explicitly connect tables in your Ruleset code</li>
+<li>Use references to common fields in your DDL</li>
+</ul>
+<p>To explicitly connect two tables using references you use the connect statement in your Ruleset code to establish the relationship between the tables. For more information about the connect and disconnect statements, see <a href="declarative-connect-disconnet.html">connect and disconnect</a>.</p>
+<p>Value Linked References allow to you create links between tables. You can establish a relationship between two tables by specifying fields that, when set to the same value, allows Gaia to automatically relate rows in those tables to each other in either a 1:1 or 1:M relationship. For more information on Value Linked References, see <a href="ddl-value-linked-references.md">Common fields</a>.</p>
+<p>You can have 4 types of connections between tables defined in the DDL:</p>
+<ul>
+<li>A 1:1 relationship which is unidirectional</li>
+<li>A 1:N relationship which is unidirectional</li>
+<li>A 1:1 relationship which is bi-directional</li>
+<li>A 1:N relationship which is bi-directional</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

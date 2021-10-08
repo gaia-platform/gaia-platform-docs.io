@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Gaia Terminology | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Gaia Terminology | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="gaia-terminology">Gaia Terminology</h1>
+
+<h2 id="a">A</h2>
+<h3 id="active-fields-rules-engine">Active Fields (<em>Rules Engine</em>)</h3>
+<p>These are Database Column names that can be referred to in the body of a Declarative Rule expression. When any code in the system refers to one of these Fields with a read operation an Event (<em>defined below</em>) is generated to cause the associated Declarative Rule to be scheduled
+for execution.</p>
+<h3 id="anchor-row-rules-engine">Anchor Row (&quot;Rules Engine&quot;)</h3>
+<h3 id="c">C</h3>
+<h3 id="catalog">Catalog</h3>
+<h3 id="d">D</h3>
+<h3 id="declarative-chaining---forward-chaining-rules-engine">Declarative Chaining - Forward Chaining (<em>Rules Engine</em>)</h3>
+<p>Declarative Chaining is a contract that defines specific automatic computation or transformation that is guaranteed by the system to occur as Fields, represented by nodes in the network, are modified.</p>
+<p><em>Forward Chaining</em> describes the 'automatic' recomputation of the values of fields that have defined declarative relationships. When a Field with a declarative Rule defined on it changes at some point in processing, the value of any dependent Fields are reevaluated based on the declarative Rule's definition.</p>
+<p>This means that Forward Chaining can result in an open ended cascade of Rule firing as the output from one declaratively defined Field is updated by the firing of other Field updates.</p>
+<p>Forward Chaining performs optimally on Fields that are updated infrequently where the resulting recomputed values are read frequently. Forward Chaining should be used instead of Backward Chaining in these cases.</p>
+<h3 id="declarative-rules-rules-engine">Declarative Rules (<em>Rules Engine</em>)</h3>
+<p>Rules that are automatically fired by events when fields are updated. The definition of a declarative Rule does not require a Rule name, but must be annotated as declarative in some way. Upon entry Declarative Rules are parsed to generate the list of Fields that are referenced in the expression. The import and enabling of a Component containing declarative rules causes all referenced fields to be annotated in the schema as 'Active' fields. The field on the right side of the expression is also marked as read-only (for performance sake) since changing it would also immediately queue an event to reset its value.</p>
+<p>Declarative Rules should be designed to be as light-weight as possible. Forward Chaining allows breaking up complex relationships into multiple rules.</p>
+<h2 id="e">E</h2>
+<h3 id="edge-database">Edge (<em>Database</em>)</h3>
+<h5 id="aliases-link">Aliases: Link</h5>
+<p>An edge captures a relationship between two Nodes. The edge metadata captures the type of the nodes that are linked as well as whether the edge is directional or not. An edge may also be thought of as a schematized list of properties.</p>
+<h3 id="event-rules-engine">Event (<em>Rules Engine</em>)</h3>
+<p>Describes input to the system that Gaia uses to fire a Rule. Events can be generated from incoming sensor data, Database operations (such as a commit), Field updates; pretty much anything that you can attach to a processing action (a Rule). Events are defined at the source of the change (a sensor's input stream, a schema entry) and a type of event. The event also names a Describes input to the system that Gaia uses to fire a Rule. Events can be generated from incoming sensor data, Database operations (such as a commit), Field updates; pretty much anything that you can attach to a processing action (a Rule). Events are defined at the source of the change (a sensor's input stream, a schema entry) and a type of event. The event also names a rRuleule that is to be fired when the specific type of event occurs.
+that is to be fired when the specific type of event occurs.</p>
+<p>Ex: Database:Insert, Database:Commit, ML:Identified (a pic), (in the schema)Field x:changed, Sensor Y: Output-Available, etc. Events are managed by a subsystem of the Rules Engine.</p>
+<h3 id="data-access-classes">Data Access Classes</h3>
+<h2 id="g">G</h2>
+<h3 id="gaia-declarative-policy-platform">Gaia Declarative Policy Platform</h3>
+<h3 id="gaia-field-pointer-database">Gaia Field Pointer (<em>Database</em>)</h3>
+<p>A Gaia Field Pointer provides direct access to a field of a TrueGraphDB entity.</p>
+<ul>
+<li>Needs discussion about the implementation</li>
+</ul>
+<h3 id="gaia-id-database">Gaia ID (<em>Database</em>)**</h3>
+<p>A persistent identifier of entities stored in TrueGraphDB (nodes and
+edges, not records). Internally, a Gaia ID maps to a locator, to allow
+access to its corresponding entity; this mapping is established at
+database startup or entity creation.</p>
+<h3 id="gaia-platform">Gaia Platform</h3>
+<p>[TBD]</p>
+<h3 id="gaia-pointer-database">Gaia Pointer (<em>Database</em>)</h3>
+<p>A Gaia Pointer is an opaque handle that can be used to reference a
+TrueGraphDB entity. It is implemented as a <em><strong>locator</strong></em> reference.</p>
+<h2 id="l">L</h2>
+<h3 id="locator-database">Locator (Database)</h3>
+<p>An in-memory entity reference. Internally, a locator is implemented as a <em>slot id</em> in a <em>slot table</em> that contains memory offsets.</p>
+<h2 id="p">P</h2>
+<h3 id="policy-set">Policy Set</h3>
+<h2 id="r">R</h2>
+<h3 id="record-database">Record (Database)</h3>
+<p>A record is a basic entity container. Unlike a Node, it cannot be referenced by edges or nodes.</p>
+<h3 id="rule-rules-engine">Rule (<em>Rules Engine</em>)</h3>
+<p>Declarative Rules that are executed automatically in response to access or changes to the values of Fields that they contain references to. When Declarative Rules are created, they generate the metadata required to update the schema with the information required to cause the database to take note of when the associated Fields are changed, and provide the name of the defining Declarative Rule that will be triggered  when Fields are accessed.</p>
+<h3 id="rule-author-rules-engine">Rule Author (<em>Rules Engine</em>)</h3>
+<p>The user who is Authoring Rules to configure the system.</p>
+<h3 id="ruleset-rules-engine">Ruleset (<em>Rules Engine</em>)</h3>
+<p>This is a logical container for a set of related rules to exist within. Rulesets are named &amp; versioned. These containers will be used for importing and exporting blocks of rules, managing system updates. A Ruleset in an active system can be enabled or disabled; when disabled
+none of the rules within are visible or executable.</p>
+<h3 id="rules-engine-rules-engine">Rules Engine (<em>Rules Engine</em>)</h3>
+<p>The subsystem that handles the management, code generation and execution of rules.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
