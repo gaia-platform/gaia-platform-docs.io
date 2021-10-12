@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-with-gaia.html",
-          "hash": "o/m1HFQBza8wL+CsmmiMsw=="
+          "hash": "XtuqoUY7VRycegLEIM6PdQ=="
         }
       },
       "is_incremental": false,
@@ -111,7 +111,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/ddl-create-table.html",
-          "hash": "CqiczaIa4aw0BX5MDyh1wg=="
+          "hash": "hTy+DhBSVIFtkyzA6dEfZA=="
         }
       },
       "is_incremental": false,
@@ -529,7 +529,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "KjHl7Rv0JTHHqPcjmzBIMg=="
+          "hash": "EaiYEL8+U3mHDG5oVkqs7g=="
         }
       },
       "is_incremental": false,
@@ -561,11 +561,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/tools/using-postgress-with-gaia.md",
+      "source_relative_path": "articles/tools/using-postgres-with-gaia.md",
       "output": {
         ".html": {
-          "relative_path": "articles/tools/using-postgress-with-gaia.html",
-          "hash": "9o2M50U6qI85sjr4Lg2jew=="
+          "relative_path": "articles/tools/using-postgres-with-gaia.html",
+          "hash": "d8ecG3NbNXfCwuZLVxy2eg=="
         }
       },
       "is_incremental": false,
@@ -744,7 +744,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 42,
-          "skipped_file_count": 41
+          "skipped_file_count": 42
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

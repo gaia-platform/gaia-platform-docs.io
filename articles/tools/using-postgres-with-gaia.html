@@ -79,9 +79,9 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="using-postgres-to-access-gaia-database-information">Using Postgres to access Gaia database information</h1>
 
-<p>For information on how to setup and configure Postgres for use with the Gaia Foreign Data Wrapper (FDW), see &lt;insert_document_reference&gt;.</p>
+<p>For information on how to setup and configure Postgres for use with the Gaia Foreign Data Wrapper (FDW), see <a href="https://www.postgresql.org/download/">PostgreSQL Downloads</a>.</p>
 <p>Connect to Postgres using the Postgres account credentials:</p>
-<p>sudo -u postgres psql</p>
+<p><code>sudo -u postgres psql</code></p>
 <p>Execute the following commands in order, at the Postgres prompt:</p>
 <pre><code class="lang-sql">DROP DATABASE IF EXISTS hello;
 CREATE DATABASE hello;
@@ -104,7 +104,7 @@ select * from hello_fdw.greetings;
 <pre><code class="lang-sql">select name from hello_fdw.gaia_table; 
 </code></pre>
 <p>To exit the Postgres session, use the following command:</p>
-<p>\q</p>
+<p><strong>\q</strong></p>
 </article>
           </div>
           
