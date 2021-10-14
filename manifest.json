@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-with-gaia.html",
-          "hash": "XtuqoUY7VRycegLEIM6PdQ=="
+          "hash": "O8OISirQrghzjNu2T/P1sw=="
         }
       },
       "is_incremental": false,
@@ -466,64 +466,6 @@
       "version": ""
     },
     {
-      "type": "Conceptual",
-      "source_relative_path": "articles/templates/baggageadvisor-template.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/templates/baggageadvisor-template.html",
-          "hash": "RisCFOUHClxeeaYRELH3fA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "articles/templates/images/baggageadvisor-template-image1.png",
-      "output": {
-        "resource": {
-          "relative_path": "articles/templates/images/baggageadvisor-template-image1.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "articles/templates/images/baggageadvisor-template-image2.png",
-      "output": {
-        "resource": {
-          "relative_path": "articles/templates/images/baggageadvisor-template-image2.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/templates/index.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/templates/index.html",
-          "hash": "v9mAFnx9c8h7VTDJv8YRGQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "articles/templates/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "articles/templates/toc.html",
-          "hash": "5qPv7Y28c3obcDomk/jESA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
       "type": "Toc",
       "source_relative_path": "articles/toc.yml",
       "output": {
@@ -553,7 +495,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/tools/tool-gaiat.html",
-          "hash": "GVJJH9+NC9heeo/IjXg5bQ=="
+          "hash": "CzrSFPCm8br9gz8xwkMbbw=="
         }
       },
       "is_incremental": false,
@@ -724,7 +666,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "6W5TfKHwkiAHUqY5+n6S1w=="
+          "hash": "rfnyu/WnCjTAPiEv5rlGdA=="
         }
       },
       "is_incremental": false,
@@ -734,17 +676,19 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 42,
-          "skipped_file_count": 42
+          "total_file_count": 40,
+          "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
