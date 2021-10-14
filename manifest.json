@@ -471,7 +471,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "EaiYEL8+U3mHDG5oVkqs7g=="
+          "hash": "jQT/ZdDw6R4UuCoTWO10BA=="
         }
       },
       "is_incremental": false,
@@ -496,18 +496,6 @@
         ".html": {
           "relative_path": "articles/tools/tool-gaiat.html",
           "hash": "CzrSFPCm8br9gz8xwkMbbw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/tools/using-postgres-with-gaia.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/tools/using-postgres-with-gaia.html",
-          "hash": "d8ecG3NbNXfCwuZLVxy2eg=="
         }
       },
       "is_incremental": false,
@@ -687,7 +675,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 40,
+          "total_file_count": 39,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

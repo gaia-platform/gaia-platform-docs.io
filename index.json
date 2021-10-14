@@ -179,11 +179,6 @@
     "title": "Gaia Translation Engine | Gaia Platform Documentation",
     "keywords": "NOTE The information contained in this document represents information about prerelease features of the product. Features might change when the product is released for general availability. Gaia Translation Engine The Gaia Translation Engine (gaiat) generates C++ rule and rule subscription code from declarative Rulesets. Usage Usage: gaiat [options] [ddl_file] Command line arguments Options Description -h Alias for -help -help Display available options (-help-hidden for more) -n=<string> DB instance name -o Alias for -output -output=<string> Output file name -version Display the version of this program"
   },
-  "articles/tools/using-postgres-with-gaia.html": {
-    "href": "articles/tools/using-postgres-with-gaia.html",
-    "title": "Using Postgres to access Gaia database information | Gaia Platform Documentation",
-    "keywords": "Using Postgres to access Gaia database information For information on how to setup and configure Postgres for use with the Gaia Foreign Data Wrapper (FDW), see PostgreSQL Downloads . Connect to Postgres using the Postgres account credentials: sudo -u postgres psql Execute the following commands in order, at the Postgres prompt: DROP DATABASE IF EXISTS hello; CREATE DATABASE hello; \\c hello; CREATE EXTENSION gaia_fdw; CREATE SERVER gaia FOREIGN DATA WRAPPER gaia_fdw; CREATE SCHEMA hello_fdw; IMPORT FOREIGN SCHEMA hello_fdw FROM SERVER gaia INTO hello_fdw; We create a hello database, to enable faster cleanup through a DROP DATABASE call later. The last 4 commands after connecting to the database enable Postgres to use the Gaia FDW to map the Gaia database tables to hello database foreign tables. This enables us to now query the Gaia database tables directly: select * from hello_fdw.names; select * from hello_fdw.greetings; We can also query Gaia database catalogs. For example, this is how we can query the names of all the Gaia database tables: select name from hello_fdw.gaia_table; To exit the Postgres session, use the following command: \\q"
-  },
   "articles/tutorials/gaia-incubator-example.html": {
     "href": "articles/tutorials/gaia-incubator-example.html",
     "title": "Gaia incubator example | Gaia Platform Documentation",
