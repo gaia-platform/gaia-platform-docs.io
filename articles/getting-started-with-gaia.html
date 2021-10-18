@@ -192,11 +192,44 @@ sudo apt-get install ./gaia-x.y.z_amd64.deb
 </tr>
 </tbody>
 </table>
+<h3 id="configuration-settings">Configuration settings</h3>
+<h3 id="overcommit-policy">Overcommit policy</h3>
+<p>The Database Server can run normally with an overcommit policy value of 0 (heuristic overcommit.), but might become unstable under rare conditions.</p>
+<p>To ensure stable performance under all conditions, we recommend changing the overcommit policy to 1 (always overcommit.)</p>
+<p>To temporarily enable this policy, open a shell with root privileges and type the following command:</p>
+<pre><code class="lang-bash">echo 1 &gt; /proc/sys/vm/overcommit_memory
+</code></pre>
+<p>To permanently enable this policy:</p>
+<ol>
+<li><p>Open /etc/sysctl.conf in an editor with root privileges and add the line</p>
+<p>vm.overcommit_memory=1</p>
+</li>
+<li><p>Save the file, and in a shell with root privileges type</p>
+<p>sysctl -p</p>
+</li>
+</ol>
+<h3 id="open-file-descriptor-limit">Open file descriptor limit</h3>
+<p>The Database Server requires a per-process open file descriptor limit of at least 65535.</p>
+<p>To temporarily set the minimum open file descriptor limit, open a shell with root privileges and type the following command:</p>
+<pre><code class="lang-bash">  ulimit -n 65535
+</code></pre>
+<p>To permanently set the minimum open file descriptor limit:</p>
+<ol>
+<li><p>Open /etc/security/limits.conf in an editor with root privileges and add the following lines:</p>
+<pre><code>* soft nofile 65535
+* hard nofile 65535
+</code></pre>
+<p><strong>Note</strong>: For enhanced security, replace the wild card '*' in these file entries with the user name of the account that is running the  Database Server.</p>
+</li>
+<li><p>save the file and start a new terminal session.</p>
+</li>
+</ol>
+<h3 id="starting-the-gaia-database-server-on-a-machine-that-supports-systemd">Starting the Gaia Database Server on a machine that supports systemd</h3>
 <p>To start the server on a machine that supports systemd:</p>
 <pre><code class="lang-bash">sudo systemctl start gaia
 </code></pre>
-<h3 id="starting-the-gaia-server-on-windows-subsystem-for-linux-wsl">Starting the Gaia server on Windows Subsystem for Linux (WSL)</h3>
-<p>When starting the Gaia server on WSL, use the --data-dir argument to specify the location in which to store the database. We recommend that you store it locally in ~/.local/gaia/db.</p>
+<h3 id="starting-the-gaia-database-server-on-windows-subsystem-for-linux-wsl">Starting the Gaia Database Server on Windows Subsystem for Linux (WSL)</h3>
+<p>When starting the Database Server on WSL, use the --data-dir argument to specify the location in which to store the database. We recommend that you store it locally in ~/.local/gaia/db.</p>
 <p>To start the server on Ubuntu and run it in the background on WSL2 (Gaia has not been tested on WSL1):</p>
 <pre><code class="lang-bash">gaia_db_server --data-dir ~/.local/gaia/db &amp;
 </code></pre>
