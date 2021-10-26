@@ -14,11 +14,71 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "articles/apps-Troubleshooting.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-Troubleshooting.html",
+          "hash": "Z2gnyIMy6K2sIDry/vq9dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/apps-building-gaia-apps.md",
       "output": {
         ".html": {
           "relative_path": "articles/apps-building-gaia-apps.html",
           "hash": "wsuhUGtKkNbVAP9E1rAYew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-direct-access.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-direct-access.html",
+          "hash": "VmjbueJE6cLcPp0pS61ZIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-filtering.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-filtering.html",
+          "hash": "4s0U0JONiuV1CzyCPbU49w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-inside-direct-access-classes.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-inside-direct-access-classes.html",
+          "hash": "oWLojXD97KnZm0/FM71Cag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-relationships.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-relationships.html",
+          "hash": "Zu5DE9xY3UwwzJ/y+TFlEg=="
         }
       },
       "is_incremental": false,
@@ -471,7 +531,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "jQT/ZdDw6R4UuCoTWO10BA=="
+          "hash": "asi812mn1vlgMjqBvHGjpg=="
         }
       },
       "is_incremental": false,
@@ -673,8 +733,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 39,
-          "skipped_file_count": 39
+          "total_file_count": 44,
+          "skipped_file_count": 43
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

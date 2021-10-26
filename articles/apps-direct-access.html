@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Using the Direct Access Classes | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Using the Direct Access Classes | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="using-the-direct-access-classes">Using the Direct Access Classes</h1>
+
+<p>The Direct Access Classes (DAC) provide an API that allows you to work directly with the Gaia database in conjunction with the Declarative C++ rules. Gaiac and gaiat generate the headers and API calls that allow you to access data in a copy-free way, transactional, thread-safe way.</p>
+<p>Accessing a value in a database record in Gaia is as fast as accessing a variable; this sets Gaia apart from most other in-memory databases.</p>
+<p>This walkthrough models the doctor/patient relationships in a hospital setting.</p>
+<h2 id="generating-direct-access-classes">Generating Direct Access Classes</h2>
+<p>You use gaiac to read the schema of a database and generate the Direct Access Classes (DACsho) for the tables contained in it.</p>
+<p>The following shows the contents of a DDL file (hospital.ddl) that contains a simple schema for a database that relates patients to their doctor.</p>
+<pre><code class="lang-sql">    database hospital
+
+    table doctor (
+        name string,
+        patients references patient[]
+    )
+
+    table patient (
+        name string,
+        height uint8,
+        is_female bool,
+        doctor references doctor,
+        address references address
+    )
+
+    table address (
+        street string,
+        city string,
+        patient references patient 
+    )
+</code></pre>
+<p>To load the schema contained in the hospital.ddl to the Gaia Catalog and generate the direct access classes, run the following command:</p>
+<p><code>gaiac hospital.ddl -d hospital -g</code></p>
+<p>The (-g) option tells gaiac to generate the direct access classes, and the (-d hospital) option specifies which database to use.</p>
+<p>If the DDL is already loaded in the Gaia database, we can run the following command. -o hospital tells to generate the header into the hospital folder:</p>
+<p><code>gaiac -d hospital -g -o hospital</code></p>
+<p>This set of options generates a hospital folder with three files:</p>
+<pre><code>    hospital/
+      gaia_hospital.h        
+      gaia_hospital.cpp
+      hospital_generated.h
+</code></pre>
+<ul>
+<li><p>gaia_hospital.h: The public header that you include in your code. It defines the direct access API methods that you use.</p>
+</li>
+<li><p>gaia_hospital.cpp: The implementation of gaia_hospital.h.</p>
+</li>
+<li><p>hospital_generated.h: Included by gaia_hospital.h; contains the serialization logic. Typically you will not need to reference this file directly.</p>
+</li>
+<li><p>The filenames are determined by gaiac, and there isn't a provided way to change the names of the output files.</p>
+</li>
+</ul>
+<p>The following is a simple example of direct access API usage that creates a doctor record with the name &quot;Gregory House&quot; (hospital.cpp):</p>
+<pre><code class="lang-cpp">    #include &lt;gaia/db/db.hpp&gt;
+    #include &quot;gaia_hospital.h&quot;
+
+    using namespace gaia::hospital;
+
+    int main()
+    {
+        gaia::db::begin_session();
+        gaia::db::begin_transaction();
+
+        doctor_t::insert_row(&quot;Gregory House&quot;);
+
+        gaia::db::commit_transaction();
+        gaia::db::end_session();
+    }
+
+</code></pre>
+<p>Run to following command to to manually compile the code:</p>
+<pre><code>clang++-10 hospital.cpp hospital/gaia_hospital.cpp /usr/local/lib/libgaia.so -I hospital/ -I /opt/gaia/include -lpthread -o hospital_app
+</code></pre>
+<h2 id="cmake-helper-functions">CMake helper functions</h2>
+<p>The Gaia SDK provides CMake functions to facilitate the integration with the Gaia tools.</p>
+<p>The function <code>process_schema</code>, within the file cmake/gaia.cmake, handles importing a DDL file and generating the Direct Access classes.</p>
+<pre><code>    project(hospital)
+
+    # We need pthreads support.
+    set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+    set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+    find_package(Threads REQUIRED)
+
+    # Includes the gaia cmake functions
+    include(&quot;/opt/gaia/cmake/gaia.cmake&quot;)
+
+    # Generate Direct Access classes from DDL
+    process_schema(
+      DDL_FILE ${PROJECT_SOURCE_DIR}/hospital.ddl
+      DATABASE_NAME hospital
+    )
+
+    add_executable(hospital
+      hospital.cpp
+    )
+
+    # Automatically adds &quot;gaia_hospital.cpp&quot; to the gaia_app target 
+
+    target_add_gaia_generated_sources(gaia_app)
+    target_include_directories(hospital PRIVATE ${GAIA_INC})
+    target_link_libraries(hospital PRIVATE gaia rt Threads::Threads)
+    Direct Access Classes
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
