@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Inside the Direct Access Classes | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Inside the Direct Access Classes | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="inside-the-direct-access-classes">Inside the Direct Access Classes</h1>
+
+<p>What's inside the generated code, and how do you use it?</p>
+<p>If you look inside gaia_hospital.h you will find one c++ class for each table in the specified database (-d hospital) when gaiac was run. Classes are not generated for tables outside of the requested database; you need to rerun gaiac with a different database to generate those classes.</p>
+<p>The Direct Access Classes map the structure of the DB table at the time of generation. Let's take a look at a simplified version of the <code>patient_t</code> class:</p>
+<pre><code class="lang-cpp">    typedef gaia::direct_access::edc_writer_t&lt;...&gt; patient_writer;
+    class patient_t : public gaia::direct_access::edc_object_t&lt;...&gt; {
+    public:
+        patient_t() : edc_object_t() {}
+        
+        // Static helpers.
+        static const char* gaia_typename();
+        static gaia::common::gaia_id_t insert_row(const char* name, uint8_t height, bool is_female);
+        static gaia::direct_access::edc_container_t&lt;c_gaia_type_patient, patient_t&gt; list();
+        
+        // Primitive type fields.
+        const char* name() const;
+        uint8_t height() const;
+        bool is_female() const;
+        
+        // Relationships.
+        doctor_t doctor() const;
+        address_ref_t address() const; 
+        ...
+    private:
+        // You can build objects by calling patient_t::get(gaia::common::gaia_id_t).
+        explicit patient_t(gaia::common::gaia_id_t id) : edc_object_t(id) {}
+    };
+</code></pre>
+<p>The most important aspect of this class is the presence of one method per table column (<code>name()</code>, <code>height()</code>, <code>is_female()</code>). You can use these methods to access the column value of a given record. Each DDL type maps to a CPP type.</p>
+<p>There are methods for relationships too. We will look at those later in the document.</p>
+<h2 id="create-db-records">Create DB records</h2>
+<p>There are two ways of creating DB records:</p>
+<ul>
+<li>The <code>insert_row()</code> method.</li>
+<li>The <code>_writer</code> object.</li>
+</ul>
+<p><code>insert_row()</code> accepts a list of values corresponding to the primitive fields. The <code>patient</code> table has three primitive columns <code>name</code>, <code>height</code>, and <code>is_female</code>; hence you need to specify a value for them all as parameters:</p>
+<pre><code class="lang-cpp">    gaia_id_t id = patient_t::insert_row(&quot;Jane&quot;, 183, true);
+    // You can later use the id to lookup the record.
+</code></pre>
+<p>The <code>_writer</code> object allows you to specify only some of the values. Values that are not specified are assigned a default value. In this example, we do not specify a
+height; hence the value will default to 0.</p>
+<pre><code class="lang-cpp">    patient_writer patient_w ;
+    patient_w.name = &quot;Jane&quot;;
+    patient_w.is_female = true;
+    gaia_id_t id = patient_w.insert_row();
+</code></pre>
+<p>For more information on default values, see <a href="reference/declarative-insert-remove.html">insert and remove</a>.</p>
+<h2 id="retrieve-specific-db-records">Retrieve specific DB records</h2>
+<p>In the examples above, we obtained a <code>gaia_id_t</code> as a result of the record creation. You can use the id to retrieve the record:</p>
+<pre><code class="lang-cpp">    patient_t jane = patient_t::get(jane_id);
+</code></pre>
+<p><strong>Note</strong>: the get method is not directly exposed by the <code>patient_t class</code> but is inherited from its superclass.</p>
+<p>Direct Access also provides a filtering API; we'll look into it in the following sections.</p>
+<p>Each EDC class overrides the <code>bool()</code> operator so that you can evaluate its validity with if:</p>
+<pre><code class="lang-cpp">    gaia_id_t invalid_id = 12344;
+    patient_t john = patient_t::get(invalid_id);
+
+    if (john)
+    {
+        gaia_log::app().info(&quot;Patient name: {}&quot;, john.name());
+    }
+    else
+    {
+        gaia_log::app().info(&quot;Cannot find patient with id: {}&quot;, invalid_id);
+    }
+</code></pre>
+<p>If you access an invalid record, you get an <code>invalid_object_id</code> exception:</p>
+<pre><code class="lang-cpp">    patient_t john = patient_t::get(12344);
+    john.name();
+</code></pre>
+<blockquote>
+<p>terminate called after throwing an instance of 'gaia::db::invalid_object_id'
+what(): Cannot find an object with ID '0'.</p>
+</blockquote>
+<h2 id="iterate-through-all-table-records">Iterate through all table records</h2>
+<p>The <code>list()</code> method exposes an iterator over all the records in a table:</p>
+<pre><code class="lang-cpp">    for (auto&amp; patient : patient_t::list())
+    {
+        gaia_log::app().info(
+            &quot;Patient name:{}, height:{}&quot;, patient.name(), patient.height());
+    }
+</code></pre>
+<h2 id="delete-db-records">Delete DB records</h2>
+<p>To delete a record, use the <code>delete_row()</code> method. This method is inherited from the <code>doctor_t</code> superclass.</p>
+<pre><code class="lang-cpp">    doctor_t house = doctor_t::get(doctor_t::insert_row(&quot;Dr. House&quot;));
+    house.delete_row();
+
+    if (!house)
+    {
+        gaia_log::app().info(&quot;The record has been deleted&quot;);
+    }
+</code></pre>
+<p>If you want to remove all the records in a table, you may be tempted to do the following:</p>
+<pre><code class="lang-cpp">    doctor_t house = doctor_t::get(doctor_t::insert_row(&quot;Dr. House&quot;));
+    doctor_t dorian = doctor_t::get(doctor_t::insert_row(&quot;Dr. Dorian&quot;));
+    doctor_t reid = doctor_t::get(doctor_t::insert_row(&quot;Dr. Reid&quot;));
+
+    for (auto&amp; doctor : doctor_t::list())
+    {
+        doctor.delete_row();
+    }
+</code></pre>
+<blockquote>
+<p>terminate called after throwing an instance of'gaia::db::invalid_object_id'
+what(): Cannot find an object with ID '0'.</p>
+</blockquote>
+<p>This approach does not work because you are modifying the container while iterating over it.</p>
+<p>One of the correct ways to do this is:</p>
+<pre><code class="lang-cpp">    for (auto&amp; doctor = *doctor_t::list().begin();
+         doctor; doctor = *doctor_t::list().begin())
+    {
+        doctor.delete_row();
+    }
+
+    gaia_log::app().info(&quot;Num doctors: {}&quot;, doctor_t::list().size());
+</code></pre>
+<blockquote>
+<p>Num doctors: 0</p>
+</blockquote>
+<p>In the following sections, we will deal with the referential integrity in cases where the doctor is connected to other tables.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
