@@ -1,0 +1,772 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/docsbuild",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-Troubleshooting.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-Troubleshooting.html",
+          "hash": "Z2gnyIMy6K2sIDry/vq9dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-building-gaia-apps.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-building-gaia-apps.html",
+          "hash": "wsuhUGtKkNbVAP9E1rAYew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-direct-access.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-direct-access.html",
+          "hash": "KwWGsv9diURukEzNUCUd+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-filtering.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-filtering.html",
+          "hash": "4s0U0JONiuV1CzyCPbU49w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-inside-direct-access-classes.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-inside-direct-access-classes.html",
+          "hash": "oWLojXD97KnZm0/FM71Cag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/apps-relationships.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/apps-relationships.html",
+          "hash": "Zu5DE9xY3UwwzJ/y+TFlEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/gaia-glossary.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/gaia-glossary.html",
+          "hash": "B+0dv6e+82cBK9KY7mB3+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/getting-started-with-gaia.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/getting-started-with-gaia.html",
+          "hash": "R8TxPBXwt3RXSADlrcycYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/flight-schema.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/flight-schema.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/rules-example-cascade.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/rules-example-cascade.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/rules-example-process-flow.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/rules-example-process-flow.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-create-database.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-create-database.html",
+          "hash": "bjXJdVVz6DqM9nWCX6lP7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-create-index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-create-index.html",
+          "hash": "lEa5xGHIols+Wmj/8CFQJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-create-table.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-create-table.html",
+          "hash": "hTy+DhBSVIFtkyzA6dEfZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-drop-database.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-drop-database.html",
+          "hash": "sOt8PkBWQOHJpt+Iuy3kJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-drop-index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-drop-index.html",
+          "hash": "labRatVD7sVj+4p9zTIUuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-drop-table.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-drop-table.html",
+          "hash": "33VhdxK/Q33TmjJOn5ql7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-gaia.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-gaia.html",
+          "hash": "kWcWUmVSKDfbhsSY9Wrq8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-relationships.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-relationships.html",
+          "hash": "w2374HdH3uZ+sOyet4Lk6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-use.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-use.html",
+          "hash": "SsZGMfWvKWIEkXK2iZDvtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/ddl-value-linked-references.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/ddl-value-linked-references.html",
+          "hash": "JIelRUJ27gugBrk07gIivw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-connect-disconnet.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-connect-disconnet.html",
+          "hash": "kKo/U9IJj/+WPGykNUks3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-extentions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-extentions.html",
+          "hash": "m0CGIdh1FIc4VkluWO3FDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-for-statement.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-for-statement.html",
+          "hash": "3ynmaM7kXUS8SdXItd1abg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-if-statement.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-if-statement.html",
+          "hash": "tOxBMJQgySxUDCdE84cAWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-insert-remove.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-insert-remove.html",
+          "hash": "AtRDSCfEDny328TqCsNMrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-on_change.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-on_change.html",
+          "hash": "sxWJHGy8yELxL2QxIp9F3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-on_insert.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-on_insert.html",
+          "hash": "XP5I63/yJeC6P69DMNm4vQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-on_update.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-on_update.html",
+          "hash": "YcvSBmIB0E++TnXet0GA1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-rule_context-structure.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-rule_context-structure.html",
+          "hash": "q8RZiMSLG1b2zL3ZdZIWeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-serial_group.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-serial_group.html",
+          "hash": "Q6otjHcSnAsMTIsDwqICXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-tables.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-tables.html",
+          "hash": "nW62HbKd6i2oHlakoC4Pug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/declarative-while-do-while.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/declarative-while-do-while.html",
+          "hash": "WdCo2mSdZzCknKhUppeqtw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/reference/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/index.html",
+          "hash": "hPPaTHtvlijlZD08PNn58w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/reference/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/reference/toc.html",
+          "hash": "wVZhhKI0zfGQVpLGAo8Ijw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/release-notes.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/release-notes.html",
+          "hash": "0FjMO2hNAVPNJZLHw/NyNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-analyzing-rules.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-analyzing-rules.html",
+          "hash": "/bsiX5UsUKcV/xs4JcbHSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-cursors-in-gaia.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-cursors-in-gaia.html",
+          "hash": "z4D503ZfHwL8m5KvEylHzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-gaia-ddl.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-gaia-ddl.html",
+          "hash": "6sVBYs73bVql40Bv8dgjDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-gaia-programming-model.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-gaia-programming-model.html",
+          "hash": "JdcVs2J2asF62S0ydD9iZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-gaia-rulesets.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-gaia-rulesets.html",
+          "hash": "DeZ/MGJOyfDMCU2C7mVStQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-using-tags.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-using-tags.html",
+          "hash": "X+Jpxt4j6AqukWL/h+OPZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-writing-rules.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-writing-rules.html",
+          "hash": "ztXz5ph+HOlEEiovP0YWLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "asi812mn1vlgMjqBvHGjpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/tools/tool-gaiac.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tools/tool-gaiac.html",
+          "hash": "9BDhCRmjV8SgXQRCIqq/9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/tools/tool-gaiat.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tools/tool-gaiat.html",
+          "hash": "CzrSFPCm8br9gz8xwkMbbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/tutorials/gaia-incubator-example.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tutorials/gaia-incubator-example.html",
+          "hash": "cWbxU5E/FPixz1Ss39kETg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-1.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-2.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-3.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-3.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-4.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-4.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-5.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-5.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-6.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-6.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/tutorials/images/incubator-example-7.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/tutorials/images/incubator-example-7.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/tutorials/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tutorials/toc.html",
+          "hash": "mDzD0k5JswPAUK8Zv9wgxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/tutorials/writing-first-gaia-application.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/tutorials/writing-first-gaia-application.html",
+          "hash": "8yQ9MY7XWH9FF/q01LFXYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/gaia-logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/gaia-logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/gaiafav.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/gaiafav.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "TiEFiQiC1AE0nN6xV/1y6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "rfnyu/WnCjTAPiEv5rlGdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 44,
+          "skipped_file_count": 44
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

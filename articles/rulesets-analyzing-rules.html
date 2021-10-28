@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Analyzing your rules | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Analyzing your rules | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<hr>
+<p><strong>NOTE</strong></p>
+<p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
+<hr>
+<h1 id="analyzing-your-rules">Analyzing your rules</h1>
+<h2 id="rule-statistics">Rule Statistics</h2>
+<p>The rules engine logs statistics according to settings in the
+`gaia.conf` configuration. The following options determining logging
+behavior:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default if Unspecified</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stats_log_interval</td>
+<td>10 seconds</td>
+<td>The interval in seconds for how frequently the rules engine logs statistics. All stats (counts, averages, etc) are calculated anew for each interval.</td>
+</tr>
+<tr>
+<td>log_individual_rule_stats</td>
+<td>False</td>
+<td>If set to true, then in addition to rollup statistics for all rules, the same statistics are calculated for each Rule.</td>
+</tr>
+</tbody>
+</table>
+<p>Here is sample output when of the Rule_stats log when individual Rule
+statistics are not collected:</p>
+<pre><code>2020-11-30T15:15:37 30026 &lt;rules_stats&gt;;: 
+------------------------- sched invoc pend aband retry excep avg lat max
+lat avg exec max exec
+
+2020-11-30T15:15:37 30026 &lt;rules_stats&gt;;: thread load:
+0.49 % 21 21 0 0 0 0 15.26 ms 23.59 ms 1.46 ms 9.31 ms
+
+2020-11-30T15:15:47 30026 &lt;rules_stats&gt;;: thread load:
+0.65 % 30 30 0 0 0 0 13.66 ms 19.66 ms 0.28 ms 7.01 ms
+</code></pre>
+<p>For example, the first data row shows that 21 rules were scheduled and
+21 rules were invoked.</p>
+<p>If individual Rule statistics are turned on, sample output might look
+like:</p>
+<pre><code>2020-11-30T15:13:25 28975 &lt;rules_stats&gt;:
+------------------------- sched invoc pend aband retry excep avg lat max
+lat avg exec max exec
+
+2020-11-30T15:13:25 28975 &lt;rules_stats&gt;: thread load:
+0.73 % 28 28 0 0 0 1 15.11 ms 24.91 ms 0.74 ms 10.61 ms
+
+2020-11-30T15:13:25 28975 &lt;rules_stats&gt;;:
+incubator_ruleset::1_sensor 27 27 0 0 0 1 15.25 ms 24.91 ms 0.77 ms
+10.61 ms
+
+2020-11-30T15:13:25 28975 &lt;rules_stats&gt;;:
+incubator_ruleset::3 1 1 0 0 0 0 11.30 ms 11.30 ms 0.01 ms 0.01 ms
+</code></pre>
+<p>Here we see that of the 28 scheduled/invocations in this time interval, the rules engine invoked <strong>incubator_ruleset::1_sensor</strong>  27 times and <strong>incubator_ruleset::3</strong> once.</p>
+<h2 id="rule-tracing">Rule Tracing</h2>
+<p>To display the rules traces to the console, edit your <em>gaia_log.conf</em> file and add the following entry:</p>
+<pre><code>logger
+name = &quot;rules&quot;
+sinks = &quot;console&quot;,
+&quot;file_rotating&quot;
+level = &quot;trace&quot;
+</code></pre>
+<p>Sample output from on console will appear similar to the following:</p>
+<pre><code>2020-11-30T15:35:33-08:00 trace 30862 30878 &lt;rules&gt;:
+call: incubator_ruleset::1_sensor
+
+2020-11-30T15:35:33-08:00 trace 30862 30874 &lt;rules&gt;:
+call: incubator_ruleset::1_sensor
+
+2020-11-30T15:35:33-08:00 trace 30862 30878 &lt;rules&gt;:
+return: incubator_ruleset::1_sensor
+
+2020-11-30T15:35:33-08:00 trace 30862 30874 &lt;rules&gt;:
+return: incubator_ruleset::1_sensor
+</code></pre>
+<p>Note that the first number following &quot;trace&quot; is the process id. The
+second number is the thread id.</p>
+<p>If an exception occurs, the tracing displays output similar to the
+following:</p>
+<pre><code>2020-11-30T15:46:34-08:00 trace 31036 31068 &lt;rules&gt;:
+exception: incubator_ruleset::2, The rules engine has not been
+initialized yet.
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
