@@ -1,0 +1,8 @@
+- name: About the Gaia Platform
+  href: index.md
+- name: Documentation
+  href: articles/
+- name: Tutorials
+  href: articles/tutorials/
+- name: Reference
+  href: articles/reference/
