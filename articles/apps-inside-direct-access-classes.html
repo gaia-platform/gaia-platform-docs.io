@@ -187,10 +187,11 @@ what(): Cannot find an object with ID '0'.</p>
 </blockquote>
 <p>This approach does not work because you are modifying the container while iterating over it.</p>
 <p>One of the correct ways to do this is:</p>
-<pre><code class="lang-cpp">    for (auto&amp; doctor = *doctor_t::list().begin();
-         doctor; doctor = *doctor_t::list().begin())
+<pre><code class="lang-cpp">    for (auto doctor_it = doctor_t::list().begin();
+           doctor_it != doctor_t::list().end();)
     {
-        doctor.delete_row();
+        auto next_doctor_it = doctor_it++;
+        (*next_doctor_it).delete_row();
     }
 
     gaia_log::app().info(&quot;Num doctors: {}&quot;, doctor_t::list().size());

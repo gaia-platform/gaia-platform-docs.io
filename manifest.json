@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/apps-inside-direct-access-classes.html",
-          "hash": "oWLojXD97KnZm0/FM71Cag=="
+          "hash": "6oRxwpwlnu2RlrrSDpXO5A=="
         }
       },
       "is_incremental": false,
@@ -567,7 +567,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/gaia-incubator-example.html",
-          "hash": "cWbxU5E/FPixz1Ss39kETg=="
+          "hash": "s+ONhuV8dSP9pMT0McY1Qw=="
         }
       },
       "is_incremental": false,
@@ -724,17 +724,19 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 44,
-          "skipped_file_count": 44
+          "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
