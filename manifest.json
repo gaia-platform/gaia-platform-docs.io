@@ -668,7 +668,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/writing-first-gaia-application.html",
-          "hash": "8yQ9MY7XWH9FF/q01LFXYg=="
+          "hash": "/Ug6Sr6ysH3hpWyK9sjvJg=="
         }
       },
       "is_incremental": false,
@@ -724,19 +724,17 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "can_incremental": true,
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0,
-        "full_build_reason_code": "NoAvailableBuildCache"
+        "skipped_file_count": 0
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 44,
-          "skipped_file_count": 0
+          "skipped_file_count": 35
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

@@ -135,7 +135,7 @@ create table if not exists greetings
 <p>The next step is to compile the definitions and generate the tables in the Gaia database. To do this, you use the gaiac tool. At the command line, in the folder in which you created the hello.ddl file, run the following command:</p>
 <p><code>gaiac hello.ddl -g --db-name hello -o hello</code></p>
 <p>The command instructs gaiac to process the hello.ddl file which creates the database and tables. The -g option tells gaiac to generate the Direct Access header and source files. The --db-name specifies which database to use and the -o option specifies the output folder for the generated files.</p>
-<p>Gaiac prints a message that tells you where it wrote the gaia_hello.h file. This file contains definitions necessary to programmatically interact with the tables that are generated based on the definitions. You will see these referred to as Direct Access code.</p>
+<p>Gaiac generates a gaia_hello.h file that contains definitions necessary to programmatically interact with the tables that are generated based on the definitions. You will see these referred to as Direct Access code.</p>
 <p>Gaiac generates a second file name hello_generated.h. This is included by the gaia_hello.h file; you will not reference this file directly.</p>
 <p>To verify that the tables were successfully created, run gaiac in an interactive mode:</p>
 <p><code>gaiac -i</code></p>
@@ -250,9 +250,9 @@ int main()
 <li>The application completes its execution by calling <strong>gaia::system::shutdown()</strong>, which is the counterpart to the <strong>gaia::system::initialize()</strong> call.</li>
 </ul>
 <p>To build this code, use the following command:</p>
-<p><code>clang++-10 hello.cpp hello_ruleset.cpp hello/gaia_hello.cpp /usr/local/lib/libgaia.so -I /opt/gaia/include -Wl,-rpath,/usr/local/lib -lpthread -o hello.run -I hello -stdlib=libc++</code></p>
+<p><code>clang++-10 hello.cpp hello_ruleset.cpp hello/gaia_hello.cpp /usr/local/lib/libgaia.so -I /opt/gaia/include -lpthread -o hello.run -I hello</code></p>
 <p>If you are using a newer version of the clang compiler or if Gaia is installed in a non-standard location, update the command accordingly.</p>
-<p>The output is a <em>hello,run</em> executable which represents your Hello application.</p>
+<p>The output is a <em>hello.run</em> executable which represents your Hello application.</p>
 <h1 id="executing-the-hello-application">Executing the Hello application</h1>
 <p>You are now ready to execute the app:</p>
 <p><code>./hello.run</code></p>
