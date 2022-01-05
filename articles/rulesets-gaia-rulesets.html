@@ -101,8 +101,8 @@
 <p>When writing your declarative code, keep in mind that each Rule runs within a separate OS thread, and each thread can only have one outstanding transaction at a time. This provides transaction isolation. Two simultaneously running rules (each with a unique thread and transaction) will never see each other's changes. Before the rest of the system can see the actions resulting from the Rule, the Rule must exit to commit the transaction.</p>
 <p>To state this another way:</p>
 <ul>
-<li>Rules run on separate threads. When data identified by an Active Field changes, your app can check the database before rules based on the field run.
-=Rules processing is atomic. A Rule must complete execution before you can see the results of actions due to the changes.</li>
+<li>Rules run on separate threads. When data identified by an Active Field changes, your app can check the database before rules based on the field run.</li>
+<li>Rules processing is atomic. A Rule must complete execution before you can see the results of actions due to the changes.</li>
 </ul>
 </article>
           </div>

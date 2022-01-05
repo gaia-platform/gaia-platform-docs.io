@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Container Class API | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Container Class API | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../images/gaiafav.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<hr>
+<p><strong>NOTE</strong></p>
+<p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
+<hr>
+<h1 id="container-class-api">Container Class API</h1>
+<p>The Direct Access Classes implement a reader and a writer class which provides zero-copy reads and direct references to related records.
+This allows you to cache values in a local variable without the overhead of performing copy every time you read a field value.</p>
+<p>The following are exposed as part of the container <code>patient _list_t</code>.</p>
+<p>Examples in these articles are taken from the Direct Access sample app that is installed with the SDK at /opt/gaia/examples/direct_access.</p>
+<p><code>patients_t::list()</code></p>
+<h2 id="methods-on-the-container">Methods on the container</h2>
+<p><strong>insert</strong></p>
+<p><code>patients_t::insert()</code> - Creates a relationship between the rows.</p>
+<p><code>insert()</code> has two overrides:</p>
+<ul>
+<li>One that accepts a gaia_id_t, which isn't typesafe, and avoids the  creation of objects if you already have the Gaia id.</li>
+<li>One that accepts an instance of a Direct Access class, which is typesafe, and does not allow passing instances of the wrong type.</li>
+</ul>
+<p>Synonym for disconnect().</p>
+<p><strong>remove</strong></p>
+<p><code>patients_t::[list_name]().remove()</code></p>
+<p>Breaks a relationship between rows.</p>
+<p>Synonym for disconnect().</p>
+<p><strong>connect</strong></p>
+<p><code>patients_t::[list_name]().connect()</code></p>
+<p>Synonym for connect().</p>
+<p><strong>disconnect</strong></p>
+<p><code>patients_t::[list_name]().disconnect()</code></p>
+<p>Aliased to remove.</p>
+<p><strong>clear</strong></p>
+<p><code>patients_t::[list_name]().clear()</code></p>
+<p>Removes all relationships (1 side of 1:1 or N side of 1:N) from this reference.</p>
+<p><strong>erase</strong></p>
+<p><code>patients_t::[list_name]().erase()</code></p>
+<p>The <code>erase()</code> method is functionally the equivalent to the <code>disconnect()</code> method except that it takes an iterator that points to the item to disconnect and returns an iterator to the next item in the list.</p>
+<p><strong>size</strong></p>
+<p><code>patients_t::[list_name]().size()</code></p>
+<p>Gets the number of linked rows.</p>
+<p>Example</p>
+<pre><code class="lang-cpp">patient_t jane = patient_t::get(patient_t::insert_row(Jane, 183, true));
+address_t kissimmee = address_t::get(address_t::insert_row(Hamlet Ln, Kissimmee));
+jane.address().connect(kissimmee);
+
+// You can also pass the id:
+jane.address().connect(kissimmee.gaia_id());
+void delete_one_to_many_relationship(gaia_id_t doctor_id)
+{
+    PRINT_METHOD_NAME();
+    doctor_t doctor = doctor_t::get(doctor_id);
+    
+    // Pick one of the doctor\'s patients.
+    patient_t patient = *(doctor.patients().begin());
+    
+    // You can unlink a single element (there are still 2 connected).
+    doctor.patients().remove(patient);
+    
+    // You can now delete the patient.
+    patient.delete_row();
+    
+    // Unlink all the remaining patients.
+    doctor.patients().clear();
+    
+    // You can now delete the doctor.
+    doctor.delete_row();
+}
+</code></pre>
+<h2 id="methods-on-value-linked-relationships">Methods on Value Linked Relationships</h2>
+<p><code>patients_t::list().begin()</code></p>
+<p><code>patients_t::list().end()</code></p>
+<p><code>patients_t::list().where()</code></p>
+<p>The <code>where()</code> takes a predicate as input and returns a container with the filtered elements as output.
+The predicate is expressed as <code>std::function bool (const &gt; T_class&amp;)</code> where the T_class is the Direct Access class contained by the container.</p>
+<p><code>edc_invalid_object_type</code>: Argument does not match the class type.</p>
+<p>Example</p>
+<pre><code class="lang-cpp">// Contains with expression.
+auto jacks_doctor_container = doctor_t::list().where(
+doctor_expr::patients.contains(
+patient_expr::name == Jack));
+auto jacks_doctor = *jacks_doctor_container.begin();
+gaia_log::app().info(&quot;Jack's doctor is {}&quot;, jacks_doctor.name());
+
+// Contains with constant.
+auto jane = *(patient_t::list().where(patient_expr::name ==Jane).begin());
+auto janes_doctor_container = doctor_t::list().where(
+doctor_expr::patients.contains(jane));
+auto janes_doctor = *janes_doctor_container.begin();
+gaia_log::app().info(&quot;Jane's doctor is {}&quot;, janes_doctor.name());
+auto doctors_with_no_patients =
+    doctor_t::list().where(doctor_expr::patients.empty());
+
+if (doctors_with_no_patients.begin() == doctors_with_no_patients.end())
+{
+    gaia_log::app().info(All the doctors have at least one patient);
+}
+...
+</code></pre>
+<h2 id="operators-on-containers"><strong>Operators on containers</strong></h2>
+<p>The following methods are used to evaluate predicates on relationships.</p>
+<p><strong>contains</strong></p>
+<p><code>contains()</code></p>
+<p>Evaluates to true when at least one object in the container matches a filter predicate.</p>
+<p><strong>empty</strong></p>
+<p><code>empty()</code></p>
+<p>Evaluates to true if a container is empty.</p>
+<p><strong>count</strong></p>
+<p><code>count()</code></p>
+<p>Evaluates to true when a container contains the specified number of elements.</p>
+<h2 id="example">Example</h2>
+<p>The following code snippet shows the usage of the <code>contains()</code> and <code>empty()</code> methods.</p>
+<pre><code class="lang-cpp">// Contains with expression.
+auto jacks_doctor_container = doctor_t::list().where(
+    doctor_expr::patients.contains(patient_expr::name == Jack));
+auto jacks_doctor = *jacks_doctor_container.begin();
+gaia_log::app().info(&quot;Jack's doctor is {}&quot;, jacks_doctor.name());
+
+// Contains with constant.
+auto jane = *(patient_t::list().where(patient_expr::name == Jane).begin());
+auto janes_doctor_container = doctor_t::list().where(
+    doctor_expr::patients.contains(jane));
+auto janes_doctor = \janes_doctor_container.begin();
+gaia_log::app().info(&quot;Jane's doctor is {}&quot;, janes_doctor.name());
+auto doctors_with_no_patients =
+    doctor_t::list().where(doctor_expr::patients.empty());
+...
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

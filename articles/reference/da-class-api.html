@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Direct Access Classes API | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Direct Access Classes API | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../images/gaiafav.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<hr>
+<p><strong>NOTE</strong></p>
+<p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
+<hr>
+<h1 id="direct-access-classes-api">Direct Access Classes API</h1>
+<p>The Direct Access Classes model the tables in the database.</p>
+<p>For each table in the database, gaiac generates code for a Direct Access Class (DAC) that includes the following items.</p>
+<p>Direct Access Classes implements reader and writer classes that provide zero-copy reads and direct references to related records.
+Since the Gaia database resides in memory, accessing a record is the same as accessing a local variable. This eliminates the need to cache database values in the client code.</p>
+<h2 id="accessors">Accessors</h2>
+<p>The DAC implements an accessor for each field in the table to retrieve the value of the field. For example:</p>
+<ul>
+<li><code>const char* doctor_t::field_name1() const</code></li>
+<li><code>uint64_t doctor_t::field_name2() const</code></li>
+<li><code>float doctor_t::field_name3() const</code></li>
+<li><code>bool doctor_t::field_name4() const</code></li>
+</ul>
+<p>For information on the full set of supported types, see <a href="ddl-create-table.html">create table</a>.</p>
+<p>Examples in these articles are taken from the Direct Access sample app that is installed with the SDK at /opt/gaia/examples/direct_access.</p>
+<h2 id="constructors">Constructors</h2>
+<p><code>doctor_t:doctor_t()</code></p>
+<p>Public default constructor. Creates an empty DAC instance.</p>
+<p>It is valid to cache DAC across transaction boundaries. The system guarantees that the correct data is maintained.</p>
+<h2 id="methods">Methods</h2>
+<p><strong>insert_row</strong></p>
+<p><code>gaia::common::gaia_id_t doctor_t::insert_row(&lt;field 1&gt;, &lt;field2&gt;,...)</code></p>
+<p>Adds a row to the table described by the class.</p>
+<p><strong>gaia_typename</strong></p>
+<p><code>const char* doctor_t::gaia_typename()</code></p>
+<p>Returns the class name <em>doctor_t</em>.</p>
+<p><strong>list</strong></p>
+<p><code>gaia::direct_access::edc_container_t&lt;c_gaia_type_address, doctor_t doctor_t::list()</code></p>
+<p>Exposes an iterator over all the records in a table.</p>
+<h2 id="structure-for-filtering">Structure for filtering</h2>
+<p>Provides predicates that you use to filter rows using the container class predicates.</p>
+<h2 id="example">Example</h2>
+<p>It this example doctor is the class name that replaces [class name] in the template above.</p>
+<pre><code class="lang-c++"> struct expr_ {
+     static gaia::direct_access::expression_t\&lt;doctor_t,  gaia::common::gaia_id_t gaia_id;
+     static gaia::direct_access::expression_t&lt;doctor_t, const char* street;
+     static gaia::direct_access::expression_t&lt;doctor_t, const char* city;
+     static gaia::direct_access::expression_t&lt;doctor_t, patient_t patient;
+ };
+</code></pre>
+<p>In addition, the DAC exposes additional methods that enable you to work with table data.</p>
+<p><strong>writer</strong></p>
+<p><code>doctor_t writer();</code></p>
+<p>Returns a reference that is pre-populated with values from the row.</p>
+<p><strong>gaia_type</strong></p>
+<p><code>gaia::common::gaia_type_t gaia_type() override;</code></p>
+<p>Returns the type id for the DAC.</p>
+<p><strong>get</strong></p>
+<p><code>static T_gaia get(gaia::common::gaia_id_t id);</code></p>
+<p>Retrieves a specific object of the type <code>T_gaia</code> based on its ID. An exception is thrown if the object represented by the ID is not of type <code>T_gaia</code>.</p>
+<p>@param ID the <code>gaia_id_t</code> of a specific database object, of type <code>container_type_id</code>.</p>
+<p><strong>delete_row</strong></p>
+<p><code>void delete_row();</code></p>
+<p>Delete the database object. This doesn't destroy the extended data class object.</p>
+<p><code>static void delete_row(gaia::common::gaia_id_t id);</code></p>
+<p>Delete the database object specified by the ID.</p>
+<h2 id="writer-class-api">Writer Class API</h2>
+<p><strong>doctor_writer</strong> (as a typedef in the generated code)</p>
+<p>The writer class provides methods that allow you to add, update, and delete rows from DAC. This includes setters for each field in the class.</p>
+<p><strong>delete_row</strong></p>
+<p><code>doctor_t::delete_row()</code></p>
+<p>Deletes the current row pointed to by the Direct Access <code>doctor_t</code> object.</p>
+<p>The following code snippet deletes all the values in the table doctor.</p>
+<pre><code class="lang-c++">for (auto doctor_it = doctor_t::list().begin();
+    doctor_it != doctor_t::list().end();)
+{
+    auto next_doctor_it = doctor_it++;
+    next_doctor_it-&gt;delete_row();
+}
+</code></pre>
+<p><strong>update_row</strong></p>
+<p><code>doctor_writer::update_row</code></p>
+<p>Updates current row pointed to by a DA_t object.</p>
+<p><strong>insert_row</strong></p>
+<p><code>doctor_writer::insert_row</code></p>
+<p>Adds a new row in a Direct Access *class name*_t object.</p>
+<h2 id="example-1">Example</h2>
+<p>The following code snippet inserts a new patient and then update his information after the row was inserted.</p>
+<pre><code class="lang-c++">gaia_id_t id = patient_t::insert_row(&quot;John&quot;, 175, false, nullptr, {});
+patient_t john = patient_t::get(id);
+gaia_log::app().info(&quot;Patient name is: {}&quot;, john.name());
+
+// Obtain the writer object for an existing record.
+patient_writer john_w = john.writer();
+john_w.name = &quot;Jane&quot;;
+john_w.height = 178;
+john_w.analysis_results = {1.0, 1.2, 0.3};
+john_w.is_active = true;
+john_w.update_row();
+gaia_log::app().info(&quot;Patient name now is: {}&quot;, john.name());
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

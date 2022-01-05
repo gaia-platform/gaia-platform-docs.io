@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Connect and Disconnect | Gaia Platform Documentation </title>
+    <title>Implicit Relationships | Gaia Platform Documentation </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Connect and Disconnect | Gaia Platform Documentation ">
+    <meta name="title" content="Implicit Relationships | Gaia Platform Documentation ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../images/gaiafav.ico">
@@ -82,113 +82,26 @@
 <p><strong>NOTE</strong></p>
 <p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
 <hr>
-<h1 id="connect-and-disconnect">Connect and Disconnect</h1>
-<p>Connect and Disconnect are methods on a field in the class representation of a table in the Gaia catalog.</p>
-<h2 id="connect">Connect</h2>
-<p>Connect links rows between two tables based on an existing relationship between the tables.</p>
-<p><code>[Identifier].field_name1.connect(Table_name2)</code></p>
-<p>The identifier can be either a table name or a tag.</p>
-<p><code>Table_name1.connect(Table_name2)</code></p>
-<p>You can use connect/disconnect directly on tables if there is only one relationship between the two tables. Otherwise, you need to use the link name as defined in the DDL.</p>
-<h2 id="disconnect">Disconnect</h2>
-<p>Disconnect unlinks the rows.</p>
-<p>Disconnecting a one to many relationship:</p>
-<p><code>[identifier].link_name.disconnect(row)</code></p>
-<p>Disconnecting a one to one relationship:</p>
-<p><code> [identifier].link_name.disconnect(row)</code></p>
-<h2 id="remarks">Remarks</h2>
-<p>Connecting rows allows you to navigate from a row to a connected row using a Navigation Path.
-You can use connect/disconnect directly on tables if there is no ambiguity; otherwise, you need to use the link name as defined in the DDL.</p>
-<p>You can specify a tag or a table name for the identifier. For more information about Tags, see Tags.</p>
-<h2 id="example">Example</h2>
-<p>Connect and Disconnect for a one to one relationship:</p>
-<pre><code>on_insert(Flight)
-{
-  // Connect a new flight to an existing passenger.
-  if (/P:Passenger.name == &quot;Bill Clinton&quot;)
-  {
-    // Equivalent to Fight.passenger_1.Connect(P)
-    passenger_1.Connect(P);
-  }
-}
- 
-on_update(Flight)
-{
-  // Disconnect a passenger from an existing flight
-  if (passenger_1.name == &quot;Bill Clinton&quot;)
-  {
-    // Equivalent to Fight.passenger_1.Disonnect()
-    passenger_1.Disconect();
-  }
-}
+<h1 id="implicit-relationships">Implicit Relationships</h1>
+<p>Implicit relationships link rows in tables by defining a relationship between fields in those tables.</p>
+<p>In the Data Definition Language (DDL) file you specify a Value Linked Reference that will establish the relationship. An implicit relationship is defined similarly to an explicit relationship except that you use a <code>where</code> clause to specify the fields that define the relationship.</p>
+<p><code>field_name references table_name [using [table_name].field_name] where table_1.field = table_2.field</code></p>
+<p>The relationship is considered <em>implicit</em> because links between rows are created automatically based on the values of their linked fields as specified by the <code>where</code> clause. This relationship is data-dependent: the linked fields in two related rows must have identical values.</p>
+<p>The <code>using</code> keyword is optional. It is only needed when you have more than one relationship between the two specified tables.</p>
+<h2 id="forward-references">Forward References</h2>
+<p>Forward References allow an identifier to reference an entity whose definition appears after the identifier. In other words, the order of the data definition statements does not matter.</p>
+<p>In Gaia DDL you build a statement that include a Forward Reference by including all of the statement segments in a single statement terminated by a semicolon. For example, the following DDL segment defines two tables: doctor and patient. The doctor table creates a reference to the patient table, which is defined after the doctor table.</p>
+<pre><code class="lang-sql">create table doctor (
+ name string,
+ patients references patient[]
+)
 
-on_insert(Passenger)
-{
-  // Connect a new passenger to an existing flight
-  if (/F:Flight.number == 32)
-  {
-    // Equivalent to Passenger.return_flight_1.Connect(F)
-    return_flight_1.Connect(F);
-    break;
-  }
-}
- 
-on_update(Passenger)
-{
-  // Disconnect a flight from an existing passenger
-  if (return_flight_1.number == 32)
-  {
-    // Equivalent to Passenger.return_flight.Disconnect()
-    return_flight_1.Disconnect();
-  }
-}
-
-on_insert(Flight)
-{
-  // Connect multiple passengers to a new flight.
-  if (/P:Passenger.name == &quot;Bill Clinton&quot; 
-    || P.name == &quot;Greg Fine&quot;
-    || P.name == &quot;Wayne Warren&quot;)
-  {
-    // Equivalent to Flight.passengers_M.Connect(P)
-    passengers_M.Connect(P);
-  }
-}
+create table patient (
+ name string,
+ doctor references doctor.patients
+);
 </code></pre>
-<p>Connect and Disconnect for a one to many relationship:</p>
-<pre><code>on_update(Flight)
-{
-  // Remove multiple passengers from an existing flight.
-  if (P:passengers.name == &quot;Bill Clinton&quot; 
-    || P.name == &quot;Greg Fine&quot;
-    || P.name == &quot;Wayne Warren&quot;)
-  {
-    passengers_M.Disconnect(P);
-  }
-}
- 
-on_insert(Passenger)
-{
-  // Add a flight to a new passenger
-  if (/F:Flight.number == 32)
-  {
-    // Equivalent to Passenger.flight_1.Connect(F)
-    flight_1.Connect(F);
-    break;
-  }
-}
- 
-on_update(Passenger)
-{
-  // Remove a flight from an existing passenger
-  // Equivalent to Passenger-&gt;Flight.flight_1.number
-  if (flight_1.number == 32)
-  {
-    // Equivalent to Passenger.flight.Disconnect()
-    flight_1.Disconnect();
-  }
-}
-</code></pre>
+<p>If the <code>doctor</code> table definition is terminated with a semicolon, the compilation of the DDL will fail since the <code>patient</code> table has not yet been defined.</p>
 </article>
           </div>
           

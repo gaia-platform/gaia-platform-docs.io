@@ -83,8 +83,18 @@
 <p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
 <hr>
 <h1 id="relationships">Relationships</h1>
+<p>Relationships in the Gaia Database allow a row in one table to reference one or more rows in another table. There are two ways to create a relationship between tables:</p>
+<ul>
+<li>Explicit Relationships</li>
+<li>Implicit Relationships</li>
+</ul>
+<h2 id="explicit-relationships">Explicit Relationships</h2>
+<p>To create an Explicit Relationship you link the rows using the <a href="ddl-connect-disconnect.md">connect()</a> method. To unlink the row you call the <a href="ddl-connect-disconnect.md">disconnect()</a> method. The relationship is considered <em>explicit</em> because you specify links between specific rows in the database, independently of the data in those rows.</p>
+<h2 id="implicit-relationships">Implicit Relationships</h2>
+<p>To associate two tables with an Implicit Relationship, specify a Value Linked Reference in the Data Definition Language (DDL) file. When two rows in different tables contain the same value in their linked fields, a link is automatically created between the rows and a relationship is created between the tables. The relationship is considered <em>implicit</em> because links between rows are data-dependent: two rows are linked if the values in their linked fields are identical.</p>
+<p>For more information on Implicit Relationships, see Implicit <a href="ddl-implicit-relationships.html">Relationships</a>.</p>
 <h2 id="create">create</h2>
-<p>Creates a one to one or a one to  many link between tables.</p>
+<p>Creates a one-to-one or a one-to-many link between tables.</p>
 <pre><code>[create] relationship [if not exists] relationship_name (
     table_name_1.field_name_1 -&gt; table_name_2[],
     table_name_2.field_name_2 -&gt; table_name_1

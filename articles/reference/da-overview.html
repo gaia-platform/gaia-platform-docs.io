@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Connect and Disconnect | Gaia Platform Documentation </title>
+    <title>Direct Access API overview | Gaia Platform Documentation </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Connect and Disconnect | Gaia Platform Documentation ">
+    <meta name="title" content="Direct Access API overview | Gaia Platform Documentation ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../images/gaiafav.ico">
@@ -82,113 +82,43 @@
 <p><strong>NOTE</strong></p>
 <p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
 <hr>
-<h1 id="connect-and-disconnect">Connect and Disconnect</h1>
-<p>Connect and Disconnect are methods on a field in the class representation of a table in the Gaia catalog.</p>
-<h2 id="connect">Connect</h2>
-<p>Connect links rows between two tables based on an existing relationship between the tables.</p>
-<p><code>[Identifier].field_name1.connect(Table_name2)</code></p>
-<p>The identifier can be either a table name or a tag.</p>
-<p><code>Table_name1.connect(Table_name2)</code></p>
-<p>You can use connect/disconnect directly on tables if there is only one relationship between the two tables. Otherwise, you need to use the link name as defined in the DDL.</p>
-<h2 id="disconnect">Disconnect</h2>
-<p>Disconnect unlinks the rows.</p>
-<p>Disconnecting a one to many relationship:</p>
-<p><code>[identifier].link_name.disconnect(row)</code></p>
-<p>Disconnecting a one to one relationship:</p>
-<p><code> [identifier].link_name.disconnect(row)</code></p>
-<h2 id="remarks">Remarks</h2>
-<p>Connecting rows allows you to navigate from a row to a connected row using a Navigation Path.
-You can use connect/disconnect directly on tables if there is no ambiguity; otherwise, you need to use the link name as defined in the DDL.</p>
-<p>You can specify a tag or a table name for the identifier. For more information about Tags, see Tags.</p>
-<h2 id="example">Example</h2>
-<p>Connect and Disconnect for a one to one relationship:</p>
-<pre><code>on_insert(Flight)
-{
-  // Connect a new flight to an existing passenger.
-  if (/P:Passenger.name == &quot;Bill Clinton&quot;)
-  {
-    // Equivalent to Fight.passenger_1.Connect(P)
-    passenger_1.Connect(P);
-  }
-}
- 
-on_update(Flight)
-{
-  // Disconnect a passenger from an existing flight
-  if (passenger_1.name == &quot;Bill Clinton&quot;)
-  {
-    // Equivalent to Fight.passenger_1.Disonnect()
-    passenger_1.Disconect();
-  }
-}
-
-on_insert(Passenger)
-{
-  // Connect a new passenger to an existing flight
-  if (/F:Flight.number == 32)
-  {
-    // Equivalent to Passenger.return_flight_1.Connect(F)
-    return_flight_1.Connect(F);
-    break;
-  }
-}
- 
-on_update(Passenger)
-{
-  // Disconnect a flight from an existing passenger
-  if (return_flight_1.number == 32)
-  {
-    // Equivalent to Passenger.return_flight.Disconnect()
-    return_flight_1.Disconnect();
-  }
-}
-
-on_insert(Flight)
-{
-  // Connect multiple passengers to a new flight.
-  if (/P:Passenger.name == &quot;Bill Clinton&quot; 
-    || P.name == &quot;Greg Fine&quot;
-    || P.name == &quot;Wayne Warren&quot;)
-  {
-    // Equivalent to Flight.passengers_M.Connect(P)
-    passengers_M.Connect(P);
-  }
-}
+<h1 id="direct-access-api-overview">Direct Access API overview</h1>
+<p>The Direct Access Classes (DAC) provide an API to work directly with the Gaia database. You use <a href="../tools/tool-gaiac.html">gaiac</a> to read a schema from the database and generate the headers that contain the API that you use to access data. For information on loading a schema to the database, see <a href="tutorials/writing-first-gaia-application.html#specifying-the-hello-database-schema">Specifying the Hello database schema</a> in &quot;Writing your first Gaia application&quot;.</p>
+<p>Examples in these articles are taken from the Direct Access sample app that is installed with the SDK at /opt/gaia/examples/direct_access.</p>
+<p>For a discussion of the sample, see <a href="../apps-direct-access.html">Using the Direct Access Classes</a>.</p>
+<p>There are four classes that you use when interacting with your data:</p>
+<ul>
+<li>DA class (class_name_t)
+<ul>
+<li>There is one class generated for each table defined in the database schema.</li>
+</ul>
+</li>
+</ul>
+<p>In addition to the DA classes, there are three other classes that are defined that you will use when writing DA code:</p>
+<ul>
+<li>writer (class_name_writer)</li>
+<li>reference (class_name_ref_t) -&gt; for 1:1 relationships</li>
+<li>container (class_name_list_t) -&gt; for 1:n relationships
+<ul>
+<li>The container class is also used to iterate over all the top-level objects of a specific type in a database.</li>
+</ul>
+</li>
+</ul>
+<p>The class_name for each of these class types is the table name listed in the schema.</p>
+<p>For example, for the following table definition:</p>
+<pre><code class="lang-c++"> table doctor (
+  name string,
+  email string unique,
+  patients references patient[]
+ )
 </code></pre>
-<p>Connect and Disconnect for a one to many relationship:</p>
-<pre><code>on_update(Flight)
-{
-  // Remove multiple passengers from an existing flight.
-  if (P:passengers.name == &quot;Bill Clinton&quot; 
-    || P.name == &quot;Greg Fine&quot;
-    || P.name == &quot;Wayne Warren&quot;)
-  {
-    passengers_M.Disconnect(P);
-  }
-}
- 
-on_insert(Passenger)
-{
-  // Add a flight to a new passenger
-  if (/F:Flight.number == 32)
-  {
-    // Equivalent to Passenger.flight_1.Connect(F)
-    flight_1.Connect(F);
-    break;
-  }
-}
- 
-on_update(Passenger)
-{
-  // Remove a flight from an existing passenger
-  // Equivalent to Passenger-&gt;Flight.flight_1.number
-  if (flight_1.number == 32)
-  {
-    // Equivalent to Passenger.flight.Disconnect()
-    flight_1.Disconnect();
-  }
-}
-</code></pre>
+<p>The following classes are generated:</p>
+<ul>
+<li>Direct Access Class: <code>doctor_t</code></li>
+<li>writer class: <code>doctor_writer</code></li>
+<li>Container class: <code>doctor_t::patients_list_t</code></li>
+</ul>
+<p>To simplify the explanations of the generated classes, the articles in this section will refer to a specific instance of a generated class, address, doctor, or patient as defined in the DDL in the Direct Access sample.</p>
 </article>
           </div>
           

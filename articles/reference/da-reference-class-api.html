@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Connect and Disconnect | Gaia Platform Documentation </title>
+    <title>Reference Class API | Gaia Platform Documentation </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Connect and Disconnect | Gaia Platform Documentation ">
+    <meta name="title" content="Reference Class API | Gaia Platform Documentation ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../images/gaiafav.ico">
@@ -82,113 +82,27 @@
 <p><strong>NOTE</strong></p>
 <p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
 <hr>
-<h1 id="connect-and-disconnect">Connect and Disconnect</h1>
-<p>Connect and Disconnect are methods on a field in the class representation of a table in the Gaia catalog.</p>
-<h2 id="connect">Connect</h2>
-<p>Connect links rows between two tables based on an existing relationship between the tables.</p>
-<p><code>[Identifier].field_name1.connect(Table_name2)</code></p>
-<p>The identifier can be either a table name or a tag.</p>
-<p><code>Table_name1.connect(Table_name2)</code></p>
-<p>You can use connect/disconnect directly on tables if there is only one relationship between the two tables. Otherwise, you need to use the link name as defined in the DDL.</p>
-<h2 id="disconnect">Disconnect</h2>
-<p>Disconnect unlinks the rows.</p>
-<p>Disconnecting a one to many relationship:</p>
-<p><code>[identifier].link_name.disconnect(row)</code></p>
-<p>Disconnecting a one to one relationship:</p>
-<p><code> [identifier].link_name.disconnect(row)</code></p>
-<h2 id="remarks">Remarks</h2>
-<p>Connecting rows allows you to navigate from a row to a connected row using a Navigation Path.
-You can use connect/disconnect directly on tables if there is no ambiguity; otherwise, you need to use the link name as defined in the DDL.</p>
-<p>You can specify a tag or a table name for the identifier. For more information about Tags, see Tags.</p>
-<h2 id="example">Example</h2>
-<p>Connect and Disconnect for a one to one relationship:</p>
-<pre><code>on_insert(Flight)
-{
-  // Connect a new flight to an existing passenger.
-  if (/P:Passenger.name == &quot;Bill Clinton&quot;)
-  {
-    // Equivalent to Fight.passenger_1.Connect(P)
-    passenger_1.Connect(P);
-  }
-}
- 
-on_update(Flight)
-{
-  // Disconnect a passenger from an existing flight
-  if (passenger_1.name == &quot;Bill Clinton&quot;)
-  {
-    // Equivalent to Fight.passenger_1.Disonnect()
-    passenger_1.Disconect();
-  }
-}
-
-on_insert(Passenger)
-{
-  // Connect a new passenger to an existing flight
-  if (/F:Flight.number == 32)
-  {
-    // Equivalent to Passenger.return_flight_1.Connect(F)
-    return_flight_1.Connect(F);
-    break;
-  }
-}
- 
-on_update(Passenger)
-{
-  // Disconnect a flight from an existing passenger
-  if (return_flight_1.number == 32)
-  {
-    // Equivalent to Passenger.return_flight.Disconnect()
-    return_flight_1.Disconnect();
-  }
-}
-
-on_insert(Flight)
-{
-  // Connect multiple passengers to a new flight.
-  if (/P:Passenger.name == &quot;Bill Clinton&quot; 
-    || P.name == &quot;Greg Fine&quot;
-    || P.name == &quot;Wayne Warren&quot;)
-  {
-    // Equivalent to Flight.passengers_M.Connect(P)
-    passengers_M.Connect(P);
-  }
-}
+<h1 id="reference-class-api">Reference Class API</h1>
+<p>Provides access for one-to-one relationships.</p>
+<p>Examples in these articles are taken from the Direct Access sample app that is installed with the SDK at /opt/gaia/examples/direct_access.</p>
+<p><code>class_name_ref_t</code></p>
+<p>Reference order is determined by the order of the tables in the DDL.</p>
+<p>The _ref_t class is only exposed on the first table that specifies the relationship in the DDL. This means that you can change membership of the related records using the first table and not the second. The second table only exposes the table_t type for the 1:1 link and not the table_ref_t type.</p>
+<p>Referential order - as a basis to replace parent/child)</p>
+<p>Exposes:</p>
+<p><strong>Constructor</strong></p>
+<pre><code class="lang-cpp">    doctor_t(gaia::common::gaia_id_t parent,
+            gaia::common::gaia_id_t child,
+            gaia::common::reference_offset_t child_offset);
 </code></pre>
-<p>Connect and Disconnect for a one to many relationship:</p>
-<pre><code>on_update(Flight)
-{
-  // Remove multiple passengers from an existing flight.
-  if (P:passengers.name == &quot;Bill Clinton&quot; 
-    || P.name == &quot;Greg Fine&quot;
-    || P.name == &quot;Wayne Warren&quot;)
-  {
-    passengers_M.Disconnect(P);
-  }
-}
- 
-on_insert(Passenger)
-{
-  // Add a flight to a new passenger
-  if (/F:Flight.number == 32)
-  {
-    // Equivalent to Passenger.flight_1.Connect(F)
-    flight_1.Connect(F);
-    break;
-  }
-}
- 
-on_update(Passenger)
-{
-  // Remove a flight from an existing passenger
-  // Equivalent to Passenger-&gt;Flight.flight_1.number
-  if (flight_1.number == 32)
-  {
-    // Equivalent to Passenger.flight.Disconnect()
-    flight_1.Disconnect();
-  }
-}
-</code></pre>
+<p><strong>Connect and Disconnect methods</strong></p>
+<p>The <code>connect()</code> and <code>disconnect()</code> methods link rows in an <a href="ddl-relationships.html">explicit relationship</a>.</p>
+<p><code>bool connect(gaia::common::gaia_id_t id);</code></p>
+<p><code>bool connect(const doctor_t_t&amp; object);</code></p>
+<p>Links rows between two tables based on an existing relationship between the tables.</p>
+<p><code>bool disconnect();</code></p>
+<p><code>bool disconnect(common::gaia_id_t id);</code></p>
+<p>Breaks the connection between rows.</p>
 </article>
           </div>
           
