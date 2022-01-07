@@ -89,7 +89,8 @@
 <li>Implicit Relationships</li>
 </ul>
 <h2 id="explicit-relationships">Explicit Relationships</h2>
-<p>To create an Explicit Relationship you link the rows using the <a href="ddl-connect-disconnect.md">connect()</a> method. To unlink the row you call the <a href="ddl-connect-disconnect.md">disconnect()</a> method. The relationship is considered <em>explicit</em> because you specify links between specific rows in the database, independently of the data in those rows.</p>
+<p>To create an Explicit Relationship you link the rows using the <a href="declarative-connect-disconnect.html">connect()</a>
+method. To unlink the row you call the <a href="declarative-connect-disconnect.html">disconnect()</a> method. The relationship is considered <em>explicit</em> because you specify links between specific rows in the database, independently of the data in those rows.</p>
 <h2 id="implicit-relationships">Implicit Relationships</h2>
 <p>To associate two tables with an Implicit Relationship, specify a Value Linked Reference in the Data Definition Language (DDL) file. When two rows in different tables contain the same value in their linked fields, a link is automatically created between the rows and a relationship is created between the tables. The relationship is considered <em>implicit</em> because links between rows are data-dependent: two rows are linked if the values in their linked fields are identical.</p>
 <p>For more information on Implicit Relationships, see Implicit <a href="ddl-implicit-relationships.html">Relationships</a>.</p>
