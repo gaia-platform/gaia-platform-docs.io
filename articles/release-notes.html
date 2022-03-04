@@ -79,10 +79,25 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="release-notes">Release Notes</h1>
 
+<h2 id="version-0400-beta-02072022">Version 0.4.0.0-beta 02/07/2022</h2>
+<ul>
+<li>Added C++17 style optional value support allowing for null values.</li>
+<li>Added Scalar optional scalar values support in DDL.</li>
+<li>Improvements in rule translation to make writing rules more intuitive.</li>
+<li>Relaxed referential integrity restraints to allow the deletion of connected nodes.</li>
+<li>The delete_row public API now accepts an additional optional parameter to force the deletion of connected parent nodes.</li>
+<li>If the catalog encounters a fatal exception, gaiat now emits single diagnostic rather than a full dump of internal gaiat errors.</li>
+<li>Refactored expressions into their own namespace.</li>
+<li>Fixed an error where using #define in a rule caused a compilation error.</li>
+<li>Changed the parameter name for <code>autotransaction_t</code> from <code>auto_begin</code> to <code>auto_restart</code>.</li>
+<li>Installing the Gaia SDK no longer installs Clang.</li>
+</ul>
 <h2 id="version-0310-beta-10152021">Version 0.3.1.0-beta 10/15/2021</h2>
-<p>The drop table command, in both it's long and short form does not remove any existing records from the database.</p>
-<p>The database will be in an inconsistent state since the catalog entries will not match that data in the database and any data operation can fail or have unintended results.</p>
-<p>Before dropping a table, you should first programmatically remove all records from the table.</p>
+<ul>
+<li>The drop table command, in both it's long and short form does not remove any existing records from the database.</li>
+<li>The database will be in an inconsistent state since the catalog entries will not match that data in the database and any data operation can fail or have unintended results.</li>
+<li>Before dropping a table, you should first programmatically remove all records from the table.</li>
+</ul>
 </article>
           </div>
           

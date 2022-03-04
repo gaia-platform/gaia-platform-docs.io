@@ -102,11 +102,15 @@ method. To unlink the row you call the <a href="declarative-connect-disconnect.h
     [, USING table_name_2(field_name_3,...), table_name_1(field_name_4, ...)]
 );
 </code></pre>
-<p>Removes the specified relationship from the catalog.</p>
+<h3 id="options">options</h3>
+<p><strong>if not exists</strong>: Specifies that the relationship is to be created only if a relationship of the specified name doesn't already exist.
+<strong>using</strong>:  Indicates the relationship in the referenced table for the current relationship definition to match. It is only needed when you have more than one relationship between the two specified tables.</p>
 <p>The short form of the <code>create relationship</code> statement, in which you omit the create operator, drops the table before attempting to create it and has the same effect as the following:</p>
 <p><code>drop relationship if exists foo; create relationship relationship_name;</code></p>
 <h2 id="drop">drop</h2>
 <p><code>drop relationship_name;</code></p>
+<p>Removes the specified relationship from the catalog.</p>
+<h2 id="remarks">Remarks</h2>
 <p>The relationship statement adds virtual fields to each of the specified tables.</p>
 <p>The following examples create relationships named &quot;incubator_sensors&quot; and &quot;incubator_actuators&quot;.</p>
 <pre><code>create relationship if not exists incubator_sensors (

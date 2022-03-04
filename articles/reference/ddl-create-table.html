@@ -85,7 +85,7 @@
 <h1 id="create-table">create table</h1>
 <p>Creates a new table. If the table already exists, gaiac returns an error and the table is not created.</p>
 <pre><code>[CREATE] TABLE [if not exists] table_name ( [
-{ fieldname datatype [UNIQUE]
+{ fieldname datatype [unique][optional]
 [, ... ]
 ] );
 </code></pre>
@@ -106,13 +106,67 @@
 <li>float - signed 4-byte floating-point number</li>
 <li>double - signed 8-byte floating-point number</li>
 <li>string - A null-terminated vector of bytes up to the limit of the available payload. Typically ASCII or utf-8.</li>
+<li>Arrays of scalar types. For example, <code>history int32[]</code>. For more information, see <a href="declarative-scalar-arrays.md">Scalar Arrays</a>.</li>
 </ul>
-<p>Remarks</p>
+<h2 id="remarks">Remarks</h2>
 <p>Use the optional `if not exists' to prevent an error from occurring if the table exists. If a table with the same name already exists, the command is ignored. However, there is no verification that the existing table has a structure identical to that indicated by the CREATE TABLE statement.</p>
 <p>The short form of the <code>create table</code> statement, in which you omit the create operator, drops the table before attempting to create it and has the same effect as the following:</p>
 <p><code>drop table if exists table_nam; create table table_name;</code></p>
 <p>The following example creates a table named &quot;department.&quot;</p>
-<p>CREATE TABLE if not exists department ( name string, current bool active);</p>
+<pre><code class="lang-sql">CREATE TABLE if not exists department ( name string, current bool active);
+</code></pre>
+<h3 id="optional-values">Optional values</h3>
+<p>When you declare an optional value in your Data Definition Language (DDL), you can specify both optional and unique.</p>
+<p>Null values are not considered when evaluating values.</p>
+<p>Fields that are speicified as optional differ from non-optional in the following manner:</p>
+<ul>
+<li>If you do not use the optional keyword, Gaia assigns a default value.</li>
+<li>If you use the option keyword, Gaia assigns a null value.</li>
+</ul>
+<p>Optional values in Gaia are implemented in the Direct Access Classes using containers that provide functionality similar to  C++17 optional values. You can expect an optional value to behave like a C++17 optional.</p>
+<p>The following table declares the height field as optional.</p>
+<pre><code class="lang-sql">    table patient (
+        name string,
+        height uint8 optional,
+        is_active bool,
+        analysis_results float[],
+        doctor references doctor,
+        address references address
+    )
+</code></pre>
+<p>The following examples show inserting a row that contains no value for the height field and then accessing that field to include it in the log output.</p>
+<pre><code class="lang-cpp">    void optional_values()
+    {
+        // You can pass nullopt instead of height to denote the absence of value.
+        gaia_id_t id = patient_t::insert_row(&quot;John&quot;, gaia::common::nullopt, false, {});
+        patient_t john = patient_t::get(id);
+    
+        // john.height() return a gaia::common::optional_t&lt;uint8&gt; which behaves
+        // similarly to a C++17 std::optional.
+        if (john.height().has_value())
+        {
+            throw std::runtime_error(&quot;The value for john.height() should be missing.&quot;);
+        }
+        else
+        {
+            gaia_log::app().info(&quot;No height provided for patient {}&quot;, john.name());
+        }
+    
+        // You can update the missing value with a value.
+        patient_writer john_w = john.writer();
+        john_w.height = 178;
+        john_w.update_row();
+    
+        if (john.height().has_value())
+        {
+            gaia_log::app().info(&quot;{}'s height is {}&quot;, john.name(), john.height().value());
+        }
+        else
+        {
+            throw std::runtime_error(&quot;The height column is supposed to have a value.&quot;);
+        }
+    }
+</code></pre>
 <p>Use the interactive feature of gaiac to list the instantiated tables:</p>
 <pre>
 gaiac> \lt

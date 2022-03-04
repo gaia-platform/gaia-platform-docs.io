@@ -83,10 +83,10 @@
 <p>Accessing a value in a database record in Gaia is as fast as accessing a variable; this sets Gaia apart from most other in-memory databases.</p>
 <p>This walkthrough models the doctor/patient relationships in a hospital setting.</p>
 <h2 id="generating-direct-access-classes">Generating Direct Access Classes</h2>
-<p>You use gaiac to read the schema of a database and generate the Direct Access Classes (DACsho) for the tables contained in it.</p>
-<p>The following shows the contents of a DDL file (hospital.ddl) that contains a simple schema for a database that relates patients to their doctor.</p>
+<p>You use gaiac to read the schema of a database and generate the Direct Access Classes (DAC) for the tables contained in it.</p>
+<p>The following shows the contents of a Data Definition Language (DDL) file (hospital.ddl) that contains a simple schema for a database that relates patients to their doctor.</p>
 <pre><code class="lang-sql">    database hospital
-
+    
     table doctor (
         name string,
         patients references patient[]
@@ -94,8 +94,9 @@
 
     table patient (
         name string,
-        height uint8,
-        is_female bool,
+        height uint8 optional,
+        is_active bool,
+        analysis_results float[],
         doctor references doctor,
         address references address
     )
@@ -103,7 +104,7 @@
     table address (
         street string,
         city string,
-        patient references patient 
+        patient references patient
     )
 </code></pre>
 <p>To load the schema contained in the hospital.ddl to the Gaia Catalog and generate the direct access classes, run the following command:</p>

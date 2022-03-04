@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/apps-building-gaia-apps.html",
-          "hash": "wsuhUGtKkNbVAP9E1rAYew=="
+          "hash": "3jkYe6W6FsaxvBSMNAowCw=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/apps-direct-access.html",
-          "hash": "KwWGsv9diURukEzNUCUd+Q=="
+          "hash": "bCr6cOh17/Wh70eG3tQr5Q=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/apps-inside-direct-access-classes.html",
-          "hash": "6oRxwpwlnu2RlrrSDpXO5A=="
+          "hash": "OYrtna/vW0GmHIPMnB1pkw=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/apps-relationships.html",
-          "hash": "Zu5DE9xY3UwwzJ/y+TFlEg=="
+          "hash": "jm7usR/mxKnWvu1R6FntLQ=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started-with-gaia.html",
-          "hash": "Spfe4d4FBc3U9gTjCiiIdA=="
+          "hash": "VLtan4gsE6lF+jEB1Ywt1A=="
         }
       },
       "is_incremental": false,
@@ -147,7 +147,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/da-class-api.html",
-          "hash": "nU1fD0BCViHmO2T9eIkwIQ=="
+          "hash": "Ez5xe1QR6PcA1IQGKEdAWg=="
         }
       },
       "is_incremental": false,
@@ -159,7 +159,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/da-container-class-api.html",
-          "hash": "HVEqGsGcbTcj0nTJFPCvSA=="
+          "hash": "ugKPY3iDtq7AMaE90xQklQ=="
         }
       },
       "is_incremental": false,
@@ -195,7 +195,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/da-reference-class-api.html",
-          "hash": "Ye7W6DmmtkROyN5xb0IlDg=="
+          "hash": "O4BsF7ipbh2hyR29PvJy1g=="
         }
       },
       "is_incremental": false,
@@ -226,12 +226,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "articles/reference/ddl-create-table.md",
       "output": {
         ".html": {
           "relative_path": "articles/reference/ddl-create-table.html",
-          "hash": "Mj7xwhf2muH7FzDnOjibDA=="
+          "hash": "rJ+x1HeL0NG8TKblMSzn3w=="
         }
       },
       "is_incremental": false,
@@ -291,7 +294,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/ddl-implicit-relationships.html",
-          "hash": "GE1r7to6/c/4gBNQolrVGw=="
+          "hash": "s9ccgCIp7GTESofdUV0Trw=="
         }
       },
       "is_incremental": false,
@@ -303,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/ddl-relationships.html",
-          "hash": "/XIH3zdqs3vQYE6SWgSlcA=="
+          "hash": "PNwOxYc5GwUwfV0zvgWiMA=="
         }
       },
       "is_incremental": false,
@@ -315,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/ddl-use.html",
-          "hash": "SsZGMfWvKWIEkXK2iZDvtQ=="
+          "hash": "dtEjW4sLKcUexxIEjA3hmQ=="
         }
       },
       "is_incremental": false,
@@ -327,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/reference/declarative-connect-disconnect.html",
-          "hash": "7Z31jyg42js+PaS3MY/1Lw=="
+          "hash": "/Qj6zUkXJyv27ydJH9QYCA=="
         }
       },
       "is_incremental": false,
@@ -495,7 +498,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/release-notes.html",
-          "hash": "0FjMO2hNAVPNJZLHw/NyNQ=="
+          "hash": "ZX2ShmQxNOLn1VSN6TdAJA=="
         }
       },
       "is_incremental": false,
@@ -531,7 +534,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/rulesets-gaia-ddl.html",
-          "hash": "6sVBYs73bVql40Bv8dgjDA=="
+          "hash": "4EhyRHQpTwXmnhOPmSp5gw=="
         }
       },
       "is_incremental": false,
@@ -543,7 +546,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/rulesets-gaia-programming-model.html",
-          "hash": "JdcVs2J2asF62S0ydD9iZg=="
+          "hash": "yE92bzIl7dP29IbgNH/8tQ=="
         }
       },
       "is_incremental": false,
@@ -556,6 +559,18 @@
         ".html": {
           "relative_path": "articles/rulesets-gaia-rulesets.html",
           "hash": "dk11k/aUtA+a9BuO0cyh4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/rulesets-navigation-paths.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/rulesets-navigation-paths.html",
+          "hash": "2fAJap4kQP5tiQqggjNVqw=="
         }
       },
       "is_incremental": false,
@@ -579,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/rulesets-writing-rules.html",
-          "hash": "ztXz5ph+HOlEEiovP0YWLQ=="
+          "hash": "QioPe0kXt+bFzJ9cziIObg=="
         }
       },
       "is_incremental": false,
@@ -591,7 +606,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "asi812mn1vlgMjqBvHGjpg=="
+          "hash": "IdyfWlPvMIjRYRXPb5Tq5A=="
         }
       },
       "is_incremental": false,
@@ -603,7 +618,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/tools/tool-gaiac.html",
-          "hash": "9BDhCRmjV8SgXQRCIqq/9Q=="
+          "hash": "TbbX9KYBafQli7++1OuMeA=="
         }
       },
       "is_incremental": false,
@@ -728,29 +743,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/tutorials/writing-first-gaia-application.html",
-          "hash": "/Ug6Sr6ysH3hpWyK9sjvJg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/gaia-logo.png",
-      "output": {
-        "resource": {
-          "relative_path": "images/gaia-logo.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "images/gaiafav.ico",
-      "output": {
-        "resource": {
-          "relative_path": "images/gaiafav.ico"
+          "hash": "/f3iHGENSjRRtIZmMMYNfw=="
         }
       },
       "is_incremental": false,
@@ -762,7 +755,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "TiEFiQiC1AE0nN6xV/1y6g=="
+          "hash": "Yltk1tok+T0ERT18EYy33g=="
         }
       },
       "is_incremental": false,
@@ -793,8 +786,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 49,
-          "skipped_file_count": 48
+          "total_file_count": 50,
+          "skipped_file_count": 21
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

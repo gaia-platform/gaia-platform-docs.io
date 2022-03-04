@@ -123,9 +123,6 @@ Since the Gaia database resides in memory, accessing a record is the same as acc
  };
 </code></pre>
 <p>In addition, the DAC exposes additional methods that enable you to work with table data.</p>
-<p><strong>writer</strong></p>
-<p><code>doctor_t writer();</code></p>
-<p>Returns a reference that is pre-populated with values from the row.</p>
 <p><strong>gaia_type</strong></p>
 <p><code>gaia::common::gaia_type_t gaia_type() override;</code></p>
 <p>Returns the type id for the DAC.</p>
@@ -138,6 +135,12 @@ Since the Gaia database resides in memory, accessing a record is the same as acc
 <p>Delete the database object. This doesn't destroy the extended data class object.</p>
 <p><code>static void delete_row(gaia::common::gaia_id_t id);</code></p>
 <p>Delete the database object specified by the ID.</p>
+<p><strong>has_value</strong></p>
+<p><code>has_value();</code></p>
+<p>Returns a boolean indicating whether there is a value in the field.</p>
+<p><strong>writer</strong></p>
+<p><code>doctor_t writer();</code></p>
+<p>Returns a reference that is pre-populated with values from the row.</p>
 <h2 id="writer-class-api">Writer Class API</h2>
 <p><strong>doctor_writer</strong> (as a typedef in the generated code)</p>
 <p>The writer class provides methods that allow you to add, update, and delete rows from DAC. This includes setters for each field in the class.</p>
@@ -152,12 +155,12 @@ Since the Gaia database resides in memory, accessing a record is the same as acc
     next_doctor_it-&gt;delete_row();
 }
 </code></pre>
-<p><strong>update_row</strong></p>
-<p><code>doctor_writer::update_row</code></p>
-<p>Updates current row pointed to by a DA_t object.</p>
 <p><strong>insert_row</strong></p>
 <p><code>doctor_writer::insert_row</code></p>
 <p>Adds a new row in a Direct Access *class name*_t object.</p>
+<p><strong>update_row</strong></p>
+<p><code>doctor_writer::update_row</code></p>
+<p>Updates current row pointed to by a DA_t object.</p>
 <h2 id="example-1">Example</h2>
 <p>The following code snippet inserts a new patient and then update his information after the row was inserted.</p>
 <pre><code class="lang-c++">gaia_id_t id = patient_t::insert_row(&quot;John&quot;, 175, false, nullptr, {});

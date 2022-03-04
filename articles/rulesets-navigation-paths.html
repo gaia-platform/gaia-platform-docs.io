@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Navigation Paths | Gaia Platform Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Navigation Paths | Gaia Platform Documentation ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../images/gaiafav.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/gaia-logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<hr>
+<p>NOTE</p>
+<p>The information contained in this document represents information about preview features of the product. Features might change when the product is released for general availability.</p>
+<hr>
+<h1 id="navigation-paths">Navigation Paths</h1>
+<p>In Gaia, references to a field in the database can take two forms:</p>
+<ul>
+<li>A Direct Reference to a single row and field.</li>
+<li>A Navigation Path that refers to a set of related data through table relationships and can represent 0, 1, or more results.</li>
+</ul>
+<p>You can declare a Navigation Path explicitly as a path through data relationships expressed as references. While this allows you to identify each relationship and to know exactly how the Path is constructed, it can result in long, unwieldy names that reduce comprehension.</p>
+<p>An explicit Navigation Path defines the path based on the relationships defined your Data Definition Language (DDL) file.</p>
+<p>Alternatively, you can choose to use abbreviated Navigation Paths. When Gaia can derive the references from the schema defined in the DDL, you can omit the explicit segments in the path to create an abbreviated Navigation Path. This can result in clearer and simpler Rule code.</p>
+<p>A Rule statement can contain multiple Navigation Paths. Each Navigation Path in the statement can expand to 0 or more results. This means that the number of times the statement executes can be the product of the result counts of each Navigation Path. For example, if a statement contains three Navigation Paths, with result set sizes 3, 1, and 15, the statement might execute up to 3x1x15 times.</p>
+<p>The following Ruleset example shows two rules that contain a multi &quot;segment&quot; path. The first rule iterates using explicit navigation while the second rule iterates using implicit navigation.</p>
+<p>Each Rule fires when the clinic is closed.</p>
+<pre><code class="lang-c++">ruleset clinics_ruleset
+{
+    on_update(clinic.closed)
+    {
+        if(closed==true)
+        {
+            for(C:clinic-&gt;D:doctor-&gt;P:patient)
+            {
+                gaia_log::app().info(
+                    &quot;{} patient of doctor {} in clinic {} notified of closure using explicit navigation.&quot;, P.name, D.name, C.name);
+            }
+        }
+        else
+        {
+            gaia_log::app().info(
+                &quot;{} is open. All patients welcome.&quot;, clinic.name);
+        } 
+    }
+
+    on_update(clinic.closed)
+    {
+        if(clinic.closed==true)
+        {
+            gaia_log::app().info(
+                &quot;{} patient of doctor {} in clinic {} notified of closure using implicit navigation.&quot;, C:clinic-&gt;D:doctor-&gt;patient.name, D.name, C.name);
+        }
+    }
+}
+</code></pre>
+<p>In the following sample run, there are two clinics. Each clinic as two doctors, each of which has two patients. When a Rule fires, it iterates four times; once for each patient.</p>
+<pre><code>[2022-01-18T12:54:04.289] [info] [12886 12886] &lt;app&gt;: Setting Mal's Practice to closed.
+[2022-01-18T12:54:04.290] [info] [12886 12886] &lt;app&gt;: Setting Doc in the Box to closed.
+[2022-01-18T12:54:04.290] [info] [12886 12913] &lt;app&gt;: Leela patient of doctor Who in clinic Mal's Practice notified of closure using explicit navigation.
+[2022-01-18T12:54:04.290] [info] [12886 12908] &lt;app&gt;: Leela patient of doctor Who in clinic Mal's Practice notified of closure using implicit navigation.
+[2022-01-18T12:54:04.290] [info] [12886 12913] &lt;app&gt;: Rose patient of doctor Who in clinic Mal's Practice notified of closure using explicit navigation.
+[2022-01-18T12:54:04.290] [info] [12886 12908] &lt;app&gt;: Rose patient of doctor Who in clinic Mal's Practice notified of closure using implicit navigation.
+[2022-01-18T12:54:04.290] [info] [12886 12913] &lt;app&gt;: Clea patient of doctor Strange in clinic Mal's Practice notified of closure using explicit navigation.
+[2022-01-18T12:54:04.290] [info] [12886 12908] &lt;app&gt;: Clea patient of doctor Strange in clinic Mal's Practice notified of closure using implicit navigation.
+[2022-01-18T12:54:04.290] [info] [12886 12913] &lt;app&gt;: Wong patient of doctor Strange in clinic Mal's Practice notified of closure using explicit navigation.
+[2022-01-18T12:54:04.290] [info] [12886 12908] &lt;app&gt;: Wong patient of doctor Strange in clinic Mal's Practice notified of closure using implicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12886] &lt;app&gt;: Setting Mal's Practice to open.
+[2022-01-18T12:54:04.291] [info] [12886 12912] &lt;app&gt;: Maurice patient of doctor Bombay in clinic Doc in the Box notified of closure using explicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12909] &lt;app&gt;: Maurice patient of doctor Bombay in clinic Doc in the Box notified of closure using implicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12912] &lt;app&gt;: Samantha patient of doctor Bombay in clinic Doc in the Box notified of closure using explicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12909] &lt;app&gt;: Samantha patient of doctor Bombay in clinic Doc in the Box notified of closure using implicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12912] &lt;app&gt;: Mayfair patient of doctor Savage in clinic Doc in the Box notified of closure using explicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12909] &lt;app&gt;: Mayfair patient of doctor Savage in clinic Doc in the Box notified of closure using implicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12912] &lt;app&gt;: Littlejohn patient of doctor Savage in clinic Doc in the Box notified of closure using explicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12909] &lt;app&gt;: Littlejohn patient of doctor Savage in clinic Doc in the Box notified of closure using implicit navigation.
+[2022-01-18T12:54:04.291] [info] [12886 12886] &lt;app&gt;: Setting Doc in the Box to open.
+[2022-01-18T12:54:04.291] [info] [12886 12911] &lt;app&gt;: Mal's Practice is open. All patients welcome.
+[2022-01-18T12:54:04.292] [info] [12886 12919] &lt;app&gt;: Doc in the Box is open. All patients welcome.
+</code></pre>
+<p>Navigation Paths occur when a Rule contains a reference to a field in the database.</p>
+<p>For example, we this field from the baggage handler scenario described in <a href="rulesets-writing-rules.html">Writing Rules with Gaia Declarative C++</a>:</p>
+<p><code>@Traveler.MemberMiles</code></p>
+<p>This essentially says:</p>
+<p>Select the MilesFlown from Traveler for the current anchor row.</p>
+<p>Navigate: flight-&gt;segment-&gt;trip-&gt;traveller</p>
+<p>Iterate: flight-&gt;segment is 1:m -- update all passengers on flight</p>
+<p>A Navigation Path iterates over the set of rows related to the anchor. To iterate over all of the rows in a table, independent of any relationships, use the &quot;/&quot; operator.</p>
+<p>flight-&gt;Segment-&gt;Trip-&gt;Traveler</p>
+<p>You can use multiple navigation paths in a single statement. This creates multiple iterations of the returned sets of rows which are evaluated from left to right.</p>
+<h2 id="abbreviated-navigation-paths">Abbreviated Navigation Paths</h2>
+<p>An abbreviated Navigation Path is one in which a database field or table reference does not start with an absolute path (that is, the anchor row, a defined tag, or an &quot;entire table&quot; notation - &quot;/&quot;).</p>
+<p>Gaia analyzes the DDL and locates the shortest path between the anchor and the field or table. The anchor row is invariant through the entire Rule  and is the starting point for every abbreviated Navigation Path.</p>
+<p>A Navigation path can contain abbreviated components. The following example shows abbreviated components in a complete Navigation Path.</p>
+<example>
+<pre><code class="lang-c++">on_update(Traveller)
+{
+   print(FlightMiles);
+   // FlightMiles is found via Traveller. Various paths are equivalent:
+   // Traveller-&gt;Trip-&gt;Segment-&gt;Flight.FlightMiles
+   // Trip-&gt;Segment-&gt;Flight.FlightMiles
+   // Segment-&gt;Flight.FlightMiles
+   // Flight.FlightMiles
+   // FlightMiles
+}
+</code></pre>
+<p>Why not always abbreviate? Some common reasons are:</p>
+<ul>
+<li>There are multiple paths from the anchor to the field, and you want to make sure the correct one is used.</li>
+<li>There are two or more paths that are of equal length between the anchor and field, and you are forced to pick one.</li>
+<li>You want to tag a segment of the path in order to refer to its fields. For example:</li>
+</ul>
+<pre><code class="lang-c++">on_update(Traveller)&gt;
+{
+   for (T:Trip-&gt;Segment-&gt;F:Flight)
+   {
+      print(T.TripMiles, F:FlightMiles);
+   }
+}
+</code></pre>
+<p>Navigation Paths with multiple relationships (need better heading)</p>
+<p>The Table-&gt;Table[.fieldname] navigation path syntax is applicable when only a single relationship exists between the related tables. However, suppose a table is related to another table via multiple relationships. In that case, you need to use the relationship name in the navigation path instead of the table name to disambiguate which path you wanted to follow.</p>
+<p>The following DDL is a fragment from a sample course registration system. It defines two tables, course which contains the available courses and prerequisites which contains prerequisites for courses. It also defines two relationships:</p>
+<ul>
+<li><code>course_prereq</code> which is a many-to-many relationship between courses where one direction is all of the courses required as prerequisites to a course.</li>
+<li><code>prereq_course</code> which is all the courses for which this is the prerequisite of.</li>
+</ul>
+<pre><code class="lang-sql">create table if not exists course (
+   course_id string,
+   name string,
+   hours int32
+);
+
+create table if not exists prereq (
+   prereq_id string,
+   min_grade string
+);
+
+create relationship if not exists prereq_course (
+   course.required_by -&gt; prereq[],
+   prereq.prereq -&gt; course
+);
+
+create relationship if not exists course_prereq (
+   course.requires -&gt; prereq[],
+   prereq.course -&gt; course
+);
+</code></pre>
+<p>The following is a snippet from a Ruleset the defines navigation paths based on the DDL.</p>
+<pre><code class="lang-c++">// Path for list of courses that are required by this course.
+course.required_by-&gt;prereq.course-&gt;course
+// Path for list of courses that require this course
+course.requires-&gt;prereq.prereq-&gt;course
+</code></pre>
+</example></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2021 GAIA Platform. All rights reserved. Declarative C++ is a trademark of GAIA Platform.<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

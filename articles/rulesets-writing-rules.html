@@ -117,8 +117,8 @@
 </code></pre>
 <p>The key to understanding this Rule is that FlightMiles is designated as an Active Field. Whenever a change to that field is committed, the Rule engine automatically fires the Rule.</p>
 <p>Each flight has many passengers. There is a 1:many relationship between the Flight row in the database, which contains FlightMiles, and the Traveler row, which contains MemberMiles. The rules engine recognizes that relationship from the Catalog and automatically iterates this statement in the Rule for every passenger on the flight. So, that one assignment causes the system to:</p>
-<p>= Recognize that there are many passengers on the flight.</p>
 <ul>
+<li>Recognize that there are many passengers on the flight.</li>
 <li>Finds all the passengers on this flight; the Rule then iterates over the result set.</li>
 <li>Starting from the Flight row, navigate to the correct Traveler row in that table for each passenger. Even here, the rules engine is automatically navigating through several intermediate rows to get from Flight to Traveler.</li>
 <li>Complete the update for every passenger. Navigation paths execute against sets of rows completely transparently and automatically.</li>
@@ -176,6 +176,7 @@ For applications requiring a single-threaded approach, you can specify the numbe
 If a transaction fails due to a concurrent transaction exception, the rules engine retries the transaction. You can configure the global setting for the number of retries for a transaction. Note that this setting is global and applies to all transactions in the database. To specify that Gaia should not retry transactions, set rule_retry_count to 0.</p>
 <h2 id="nested-iteration">Nested Iteration</h2>
 <p>In a Rule, statements that contain references to fields in the database can initiate iterative behavior over the returned result set. Gaia iterates through all indicated values (based on the reference) until the statement has exited, either by running out of values or it is forced to exit via a 'break' or 'return' statement, before proceeding to the next statement in the Rule.</p>
+<p>The Rules translator translates statements that generate loops from left to right with each successive loop executing within the scope of the previous loop.</p>
 <p>Suppose we have an if statement that iterates over all passengers, which references the luggage for each passenger.</p>
 <pre><code>If ( @passengerstatus == “missing” )
     { if ( luggagestatus == “loaded” )

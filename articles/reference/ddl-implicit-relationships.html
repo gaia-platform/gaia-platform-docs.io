@@ -87,7 +87,8 @@
 <p>In the Data Definition Language (DDL) file you specify a Value Linked Reference that will establish the relationship. An implicit relationship is defined similarly to an explicit relationship except that you use a <code>where</code> clause to specify the fields that define the relationship.</p>
 <p><code>field_name references table_name [using [table_name].field_name] where table_1.field = table_2.field</code></p>
 <p>The relationship is considered <em>implicit</em> because links between rows are created automatically based on the values of their linked fields as specified by the <code>where</code> clause. This relationship is data-dependent: the linked fields in two related rows must have identical values.</p>
-<p>The <code>using</code> keyword is optional. It is only needed when you have more than one relationship between the two specified tables.</p>
+<h2 id="options">options</h2>
+<p><strong>using</strong>: Indicates the reference in the referenced table for the current reference definition to match. It is only needed when you have more than one reference between the two specified tables.</p>
 <h2 id="forward-references">Forward References</h2>
 <p>Forward References allow an identifier to reference an entity whose definition appears after the identifier. In other words, the order of the data definition statements does not matter.</p>
 <p>In Gaia DDL you build a statement that include a Forward Reference by including all of the statement segments in a single statement terminated by a semicolon. For example, the following DDL segment defines two tables: doctor and patient. The doctor table creates a reference to the patient table, which is defined after the doctor table.</p>
